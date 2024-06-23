@@ -1,1 +1,1 @@
-# Institute-Management-System-with-Django
+# Institute Management System with Django
