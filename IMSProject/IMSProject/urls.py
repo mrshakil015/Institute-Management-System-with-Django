@@ -4,5 +4,6 @@ from IMSapp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',homePage,name="homePage"),
+    path('',homepage,name="homepage"),
+    path('contactpage/',contactpage,name="contactpage"),
 ]
