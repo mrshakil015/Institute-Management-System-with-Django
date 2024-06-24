@@ -6,6 +6,19 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 - username
 - UserType(Authority, Student, Teacher, Staff)
 - password
+- email
+
+## PersonalInfoModel
+- Imsuser
+- FatherName
+- MotherName
+- Religion
+- DOB
+- Gender
+- Mobile
+- EmergencyContact
+- PresentAddress
+- PermanentAddress
 
 ## CourseInfoModel
 - CourseName
@@ -21,19 +34,12 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 ## StudentModel
 - Imsuser(OneToField Relation with IMSUserModel)
 - StudentName
-- FatherName
-- MotherName
-- Religion
-- DOB
-- Gender(Male, Female)
-- Email
-- Mobile
-- EmergencyContact
-- PresentAddress
-- PermanentAddress
 - StudentPhoto
 - AdmissionDate
 - EducationalQualification
+- LinkedInLink
+- GithubLink
+- FacebookLink
 
 ## BatchInfoModel
 - Batchuser(Foreginkey Relation with StudentModel)
@@ -49,17 +55,10 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 - EmployID
 - TeacherName
 - Designation
-- FatherName
-- MotherName
-- Religion
-- DOB
-- Gender
-- Email
-- Mobile
-- EmergencyContact
-- PresentAddress
-- PermanentAddress
 - Skills
+- LinkedInLink
+- GithubLink
+- FacebookLink
 
 ## AdmittedCourseModel
 - Courseuser(OneToOne Relation with StudentModel)
@@ -92,3 +91,13 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 - Name
 - Salary
 - PaymentDate
+
+## ContactModel
+- Mobile
+- Address
+- Email
+- MapLink
+- GithubLink
+- FacebookLink
+- YoutubeLink
+- TwitterLink

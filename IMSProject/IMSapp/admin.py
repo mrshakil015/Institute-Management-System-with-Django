@@ -2,8 +2,12 @@ from django.contrib import admin
 from IMSapp.models import *
 
 class IMSUserModel_Display(admin.ModelAdmin):
-    list_display=['username','UserType']
+    list_display=['username','UserType','email']
 admin.site.register(IMSUserModel,IMSUserModel_Display)
+
+class PersonalInfoModel_Display(admin.ModelAdmin):
+    list_display=['Imsuser','Mobile']
+admin.site.register(PersonalInfoModel,PersonalInfoModel_Display)
 
 
 class CourseInfoModel_Dispaly(admin.ModelAdmin):
@@ -12,7 +16,7 @@ admin.site.register(CourseInfoModel,CourseInfoModel_Dispaly)
 
 
 class StudentModel_Dispaly(admin.ModelAdmin):
-    list_display=['StudentName','Gender']
+    list_display=['Imsuser','StudentName','EducationalQualification']
 admin.site.register(StudentModel,StudentModel_Dispaly)
 
 
@@ -22,8 +26,10 @@ admin.site.register(BatchInfoModel,BatchInfoModel_Dispaly)
 
 
 class TeacherModel_Dispaly(admin.ModelAdmin):
-    list_display=['TeacherName','Gender']
+    list_display=['Imsuser','TeacherName','Designation']
 admin.site.register(TeacherModel,TeacherModel_Dispaly)
+
+admin.site.register(ContactModel)
 
 
 
