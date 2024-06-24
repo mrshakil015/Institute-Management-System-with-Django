@@ -1064,6 +1064,8 @@ section,
 .courses .course-item {
   border-radius: 5px;
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.155);
+  border-radius: 10px;
 }
 
 .courses .course-content {
@@ -1143,6 +1145,7 @@ section,
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   text-align: center;
   margin-bottom: 20px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.159); 
 }
 
 .trainers-index .member img {

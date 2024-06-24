@@ -59,6 +59,7 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 - LinkedInLink
 - GithubLink
 - FacebookLink
+- JoinDate
 
 ## AdmittedCourseModel
 - Courseuser(OneToOne Relation with StudentModel)
@@ -73,18 +74,8 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 ## StaffModel
 - Imsuser(OneToField Relation with IMSUserModel)
 - EmployID
-- StaffName
 - StaffDesignation
-- FatherName
-- MotherName
-- Religion
-- DOB
-- Gender
-- Email
-- Mobile
-- EmergencyContact
-- PresentAddress
-- PermanentAddress
+- JoinDate
 
 ## ‍SalaryModel
 - Imsuser(Foreginkey Relation with IMSUserModel)
