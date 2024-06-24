@@ -2,7 +2,7 @@
 
 Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5qk9h14d5fIJ9e9IPE7M/edit?usp=sharing
 
-## IMSUserModel:
+## IMSUserModel
 - username
 - UserType(Authority, Student, Teacher, Staff)
 - password
