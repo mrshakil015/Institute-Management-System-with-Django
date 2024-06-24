@@ -67,6 +67,7 @@ class TeacherModel(models.Model):
     LinkedInLink =models.CharField(max_length=150,null=True)
     GithubLink =models.CharField(max_length=150,null=True)
     FacebookLink =models.CharField(max_length=150,null=True)
+    JoinDate = models.DateField(auto_now_add=True,null=True)
     
 class ContactModel(models.Model):
     Mobile = models.CharField(max_length=50,null=True)
@@ -96,25 +97,11 @@ class AdmittedCourseModel:
 
 ## StaffModel
 class StaffModel(models.Model):
-    GENDER=[
-        ('male','Male'),
-        ('female','Female'),
-        ('others','others'),
-    ]
-    gender_type=models.CharField(choices=GENDER,max_length=150,null=True)
-    Imsuser=models.ForeignKey(IMSUserModel, on_delete=models.CASCADE,null=True)
-    EmployID=models.CharField(max_length=150,null=True)
+    Imsuser=models.OneToOneField(IMSUserModel, on_delete=models.CASCADE,null=True)
     StaffName=models.CharField(max_length=150,null=True)
+    EmployID=models.CharField(max_length=150,null=True)
     StaffDesignation=models.CharField(max_length=150,null=True)
-    FatherName=models.CharField(max_length=150,null=True)
-    MotherName=models.CharField(max_length=150,null=True)
-    Religion=models.CharField(max_length=150,null=True)
-    DOB=models.DateField(null=True)
-    Email=models.CharField(max_length=150,null=True)
-    Mobile=models.CharField(max_length=150,null=True)
-    EmergencyContact=models.CharField(max_length=150,null=True)
-    PresentAddress=models.CharField(max_length=150,null=True)
-    PermanentAddress=models.CharField(max_length=150,null=True)
+    JoinDate = models.DateField(auto_now_add=True,null=True)
 
 ## ‍SalaryModel
 

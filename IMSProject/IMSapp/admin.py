@@ -29,17 +29,16 @@ class TeacherModel_Dispaly(admin.ModelAdmin):
     list_display=['Imsuser','TeacherName','Designation']
 admin.site.register(TeacherModel,TeacherModel_Dispaly)
 
-admin.site.register(ContactModel)
-
-
-
 class StaffModel_Display(admin.ModelAdmin):
-    list_display=['StaffName','StaffDesignation','Mobile']
-admin.site.register(StaffModel_Display,StaffModel)
+    list_display=['Imsuser','StaffName','EmployID']
+admin.site.register(StaffModel,StaffModel_Display)
 
 ##Salary Model needs to be registered
+class SalaryModel_Display(admin.ModelAdmin):
+    list_display=['Imsuser','Salary']
+admin.site.register(SalaryModel,SalaryModel_Display)
 
-
+admin.site.register(ContactModel)
         
 
                     
