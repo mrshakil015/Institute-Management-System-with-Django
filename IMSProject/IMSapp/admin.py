@@ -33,4 +33,18 @@ admin.site.register(ContactModel)
 
 
 
+class StaffModel_Display(admin.ModelAdmin):
+    list_display=['StaffName','StaffDesignation','Mobile']
+admin.site.register(StaffModel_Display,StaffModel)
+
+##Salary Model needs to be registered
+
+
+        
+
+                    
+                    
+
+
+
 

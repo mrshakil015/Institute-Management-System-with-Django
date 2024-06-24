@@ -80,3 +80,46 @@ class ContactModel(models.Model):
     
     def __str__(self):
         return self.Mobile
+
+## AdmittedCourseModel
+
+class AdmittedCourseModel:
+    Courseuser=models.OneToOneField(StudentModel,on_delete=models.CASCADE,null=True)
+    AssignTeacher=models.ForeignKey(TeacherModel,on_delete=models.CASCADE,null=True)
+    LearningBatch=models.OneToOneField(BatchInfoModel,on_delete=models.CASCADE,null=True)
+    CourseName=models.ForeignKey(CourseInfoModel,on_delete=models.CASCADE,null=True)
+    CourseFee=models.CharField(max_length=150,null=True)
+    Payment=models.CharField(max_length=150,null=True)
+    Due=models.CharField(max_length=150,null=True)
+    AdmissionDate=models.DateField(null=True) 
+
+
+## StaffModel
+class StaffModel(models.Model):
+    GENDER=[
+        ('male','Male'),
+        ('female','Female'),
+        ('others','others'),
+    ]
+    gender_type=models.CharField(choices=GENDER,max_length=150,null=True)
+    Imsuser=models.ForeignKey(IMSUserModel, on_delete=models.CASCADE,null=True)
+    EmployID=models.CharField(max_length=150,null=True)
+    StaffName=models.CharField(max_length=150,null=True)
+    StaffDesignation=models.CharField(max_length=150,null=True)
+    FatherName=models.CharField(max_length=150,null=True)
+    MotherName=models.CharField(max_length=150,null=True)
+    Religion=models.CharField(max_length=150,null=True)
+    DOB=models.DateField(null=True)
+    Email=models.CharField(max_length=150,null=True)
+    Mobile=models.CharField(max_length=150,null=True)
+    EmergencyContact=models.CharField(max_length=150,null=True)
+    PresentAddress=models.CharField(max_length=150,null=True)
+    PermanentAddress=models.CharField(max_length=150,null=True)
+
+## ‍SalaryModel
+
+class SalaryModel(models.Model):
+    Imsuser=models.ForeignKey(IMSUserModel, on_delete=models.CASCADE,null=True)
+    Name=models.CharField(max_length=150,null=True)
+    Salary=models.CharField(max_length=150,null=True)
+    PaymentDate=models.DateField(null=True)
