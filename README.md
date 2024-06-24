@@ -36,7 +36,7 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 - EducationalQualification
 
 ## BatchInfoModel
-- Imsuser(Foreginkey Relation with StudentModel)
+- Batchuser(Foreginkey Relation with StudentModel)
 - BatchNo
 - Batchschedule
 - Status
@@ -62,7 +62,7 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 - Skills
 
 ## AdmittedCourseModel
-- Imsuser(Foreginkey Relation with StudentModel)
+- Courseuser(OneToOne Relation with StudentModel)
 - AssignTeacher(Foreginkey Relation with TeacherModel)
 - LearningBatch(OneToOne Relation with BatchInfoModel)
 - CourseName(Foreginkey Relation with CourseInfoModel)
