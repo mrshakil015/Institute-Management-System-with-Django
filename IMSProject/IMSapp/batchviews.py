@@ -10,4 +10,4 @@ def editbatch(request):
     return render("batches/editbatch.html")
 
 def viewbatch(request):
-    return render("batches/viewbatch.html")
+    return render("batches/viewbatch.html")     
