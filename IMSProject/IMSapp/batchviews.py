@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 
-def addbatches(request):
-    return render("batches/addbatches.html")
+def addbatch(request):
+    return render("batches/addbatch.html")
 
 def batchlist(request):
     return render("batches/batchlist.html")
