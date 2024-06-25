@@ -4,15 +4,15 @@ from django.shortcuts import render
 def homepage(request):
     
     
-    return render(request,'homepage.html')
+    return render(request,'common/homepage.html')
 
 def dashboard(request):
     
-    return render(request,'dashboard.html')
+    return render(request,'common/dashboard.html')
 
 def contactpage(request):
     
     context = {
         'pagetitle':'Contact US'
     }
-    return render(request,'contact.html',context)
+    return render(request,'common/contact.html',context)
