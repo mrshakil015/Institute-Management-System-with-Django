@@ -1,3 +1,8 @@
 Admin Panel
-username = ims
-password = 1234
+    username = ims
+    password = 1234
+
+Authority
+    username = ims121
+    password = 1234
+    
