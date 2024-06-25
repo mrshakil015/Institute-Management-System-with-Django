@@ -43,10 +43,7 @@
     {% include 'profilemaster/sidebar.html' %}
     <!-- End Sidebar -->
 
-    
-    {% block content %}
-        
-    {% endblock content %}
+  
         
 
     <div class="main-panel">
@@ -54,7 +51,14 @@
         {% include 'profilemaster/header.html' %}
     <!-- End Header -->
       
-
+    <div class="container">
+      <div class="page-inner">
+        {% block content %}
+        
+        {% endblock content %}
+        </div>
+      </div>
+  
 
       <!-- Start Footer -->
         {% include 'profilemaster/footer.html' %}

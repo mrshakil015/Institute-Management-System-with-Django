@@ -16,3 +16,8 @@ def contactpage(request):
         'pagetitle':'Contact US'
     }
     return render(request,'common/contact.html',context)
+
+def loginpage(request):
+    
+    
+    return render(request, 'common/login.html')
