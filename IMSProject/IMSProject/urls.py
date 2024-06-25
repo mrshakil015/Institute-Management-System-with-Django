@@ -16,6 +16,7 @@ urlpatterns = [
     path('contactpage/',contactpage,name="contactpage"),
     path('dashboard/',dashboard,name="dashboard"),
     path('loginpage/',loginpage,name="loginpage"),
+    path('logoutPage/',logoutPage,name="logoutPage"),
     
     ##courses
     
