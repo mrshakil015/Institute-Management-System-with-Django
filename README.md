@@ -2,6 +2,10 @@
 
 Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5qk9h14d5fIJ9e9IPE7M/edit?usp=sharing
 
+<details>
+<summary>Model Information</summary>
+
+
 ## IMSUserModel
 - username
 - UserType(Authority, Student, Teacher, Staff)
@@ -92,3 +96,22 @@ Documentation Link: https://docs.google.com/document/d/16DTSIH5HFTdwWlFqAwML-Kc5
 - FacebookLink
 - YoutubeLink
 - TwitterLink
+
+</details>
+
+<details>
+<summary>Sidebar</summary>
+
+### Authority Dashboard:
+- Dashboard
+- Students
+- Courses
+- Batches
+- Pending Student List
+- Exam Result
+- Teacher Attendance
+- Student Payment
+- Teacher Salary
+- Contact
+
+</details>
