@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('addstudent/',addstudent,name="addstudent"),
     path('editstudent/',editstudent,name="editstudent"),
-    path('studentlist/',studentlist,name="studentlist"),
+    path('studentList/',studentlist,name="studentList"),
     path('viewstudent/',viewstudent,name="viewstudent"),
     
     ##Teacher
