@@ -3,6 +3,7 @@ from django.urls import path
 from IMSapp.views import *
 from IMSapp.courseviews import *
 from IMSapp.studentviews import *
+from IMSapp.teacherviews import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +24,11 @@ urlpatterns = [
     path('editstudent/',editstudent,name="editstudent"),
     path('studentlist/',studentlist,name="studentlist"),
     path('viewstudent/',viewstudent,name="viewstudent"),
+    
+    ##Teacher
+    path('addteacher/',addteacher,name="addteacher"),
+    path('editteacher/',editteacher,name="editteacher"),
+    path('teacherlist/',teacherlist,name="teacherlist"),
+    path('viewteacher/',viewteacher,name="viewteacher"),
 
     ]
