@@ -5,6 +5,7 @@ from IMSapp.courseviews import *
 from IMSapp.studentviews import *
 from IMSapp.batchviews import *
 from IMSapp.teacherviews import *
+from IMSapp.staffviews import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,6 +38,12 @@ urlpatterns = [
     path('batchlist/',batchlist,name="batchlist"),
     path('editbatch/',editbatch,name="editbatch"),
     path('viewbatch/',viewbatch,name="viewbatch"),
+
+    #staff
+    path('addstaff/',addstaff,name="addstaff"),
+    path('editstaff/',editstaff,name="editstaff"),
+    path('stafflist/',stafflist,name="stafflist"),
+    path('viewstaff/',viewstaff,name="viewstaff"),
 
 
     ]
