@@ -27,8 +27,9 @@ def courselist(request):
 def editcourse(request,myid):
     coursedata = get_object_or_404(CourseInfoModel,id=myid)
     if request.method == 'POST':
-        courseform = CourseInfoForm(request.POST, instance=coursedata)
-        
+        img = coursedata.CourseImage
+        os.remove(img.path)
+        courseform = CourseInfoForm(request.POST, request.FILES, instance=coursedata)
         if courseform.is_valid():
             courseform.save()
             return redirect('courselist')

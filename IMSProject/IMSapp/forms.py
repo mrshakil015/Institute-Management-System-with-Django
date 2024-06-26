@@ -9,6 +9,8 @@ class CourseInfoForm(forms.ModelForm):
         labels = {
             "CourseName":"Course Name",
             "Lecture":"No of Lecture",
+            "ShortSummary":"Short Summary",
+            "CourseCategory":"Course Category",
             "CourseDuration":"Course Duration",
             "WeeklyClass":"Weekly Class",
             "ClassDuration":"Class Duration(in Minutes)",

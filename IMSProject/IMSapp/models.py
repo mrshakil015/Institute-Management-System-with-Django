@@ -31,6 +31,8 @@ class PersonalInfoModel(models.Model):
 class CourseInfoModel(models.Model):
     CourseName=models.CharField(max_length=150, null=True)
     Sologan=models.CharField(max_length=100, null=True)
+    ShortSummary=models.CharField(max_length=150, null=True)
+    CourseCategory=models.CharField(max_length=100, null=True)
     Lecture=models.IntegerField(null=True)
     CourseDuration=models.IntegerField(null=True)
     WeeklyClass=models.IntegerField(null=True)

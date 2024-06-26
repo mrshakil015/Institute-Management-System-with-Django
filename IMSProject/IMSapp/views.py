@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
+from IMSapp.models import *
 
 # Create your views here.
 
 def homepage(request):
-    return render(request,'common/homepage.html')
+    coursedata = CourseInfoModel.objects.all()
+    context = {
+        'coursedata':coursedata,
+    }
+    return render(request,'common/homepage.html',context)
 
 @login_required
 def dashboard(request):
