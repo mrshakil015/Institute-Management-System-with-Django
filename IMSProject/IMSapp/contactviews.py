@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from IMSapp.forms import *
 from IMSapp.models import WebsiteContactModel
 
@@ -29,3 +29,21 @@ def contactlist(request):
     contactdata = WebsiteContactModel.objects.all()
     
     return render(request,'contact/contactlist.html',{'contactdata':contactdata})
+
+def editcontact(request,myid):
+    contactdata = get_object_or_404(WebsiteContactModel, id=myid)
+    
+    if request.method == 'POST':
+        contactform = WebsiteContacForm(request.POST, instance=contactdata)
+        
+        if contactform.is_valid():
+            contactform.save()
+            return redirect('contactlist')
+        
+    else:
+        contactform = WebsiteContacForm(instance=contactdata)
+    
+    context = {
+        'contactform':contactform
+    }
+    return render(request,'contact/editcontact.html',context)

@@ -22,6 +22,7 @@ urlpatterns = [
     path('contactpage/',contactpage,name="contactpage"),
     path('addcontact/',addcontact,name="addcontact"),
     path('contactlist/',contactlist,name="contactlist"),
+    path('editcontact/<str:myid>',editcontact,name="editcontact"),
     
     ##courses
     
