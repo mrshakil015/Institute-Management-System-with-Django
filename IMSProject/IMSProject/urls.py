@@ -23,17 +23,16 @@ urlpatterns = [
     path('addcontact/',addcontact,name="addcontact"),
     path('contactlist/',contactlist,name="contactlist"),
     path('editcontact/<str:myid>',editcontact,name="editcontact"),
+    path('deletecontact/<str:myid>',deletecontact,name="deletecontact"),
     
-    ##courses
-    
+    #----------Courses------------
     path('addcourse/',addcourse,name="addcourse"),
     path('courselist/',courselist,name="courselist"),
     path('editcourse/<str:myid>',editcourse,name="editcourse"),
     path('deletecourse/<str:myid>',deletecourse,name="deletecourse"),
     path('viewcourse/',viewcourse,name="viewcourse"),
 
-    #student
-
+    #------------Student----------------
     path('addstudent/',addstudent,name="addstudent"),
     path('editstudent/',editstudent,name="editstudent"),
     path('studentList/',studentlist,name="studentList"),

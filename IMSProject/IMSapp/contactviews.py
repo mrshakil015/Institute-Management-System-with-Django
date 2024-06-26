@@ -32,18 +32,20 @@ def contactlist(request):
 
 def editcontact(request,myid):
     contactdata = get_object_or_404(WebsiteContactModel, id=myid)
-    
     if request.method == 'POST':
         contactform = WebsiteContacForm(request.POST, instance=contactdata)
-        
         if contactform.is_valid():
             contactform.save()
             return redirect('contactlist')
-        
     else:
         contactform = WebsiteContacForm(instance=contactdata)
-    
     context = {
         'contactform':contactform
     }
     return render(request,'contact/editcontact.html',context)
+
+def deletecontact(request,myid):
+    contactdata = get_object_or_404(WebsiteContactModel,id=myid)
+    contactdata.delete()
+    return redirect('contactlist')
+    
