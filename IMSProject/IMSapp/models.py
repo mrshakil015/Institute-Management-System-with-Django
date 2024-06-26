@@ -51,7 +51,6 @@ class StudentModel(models.Model):
     FacebookLink =models.CharField(max_length=150,null=True)
     
 class BatchInfoModel(models.Model):
-    Batchuser=models.ForeignKey(StudentModel,on_delete=models.CASCADE,related_name='batchinfo',null=True)
     BatchNo=models.CharField(max_length=100,null=True)
     Batchschedule=models.CharField(max_length=100,null=True)
     Status=models.CharField(max_length=100,null=True)
