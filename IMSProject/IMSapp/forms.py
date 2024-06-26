@@ -17,8 +17,6 @@ class CourseInfoForm(forms.ModelForm):
             "CourseImage":"Course Image",
         }
 
-        #exclude = []
-
 class StudentForm(forms.ModelForm):
     class Meta:
         model = StudentModel
