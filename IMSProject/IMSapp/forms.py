@@ -5,8 +5,8 @@ class CourseInfoForm(forms.ModelForm):
     class Meta:
         model = CourseInfoModel
         fields = "__all__"
-        exclude = ['Imsuser']
-        lebels = {
+        
+        labels = {
             "CourseName":"Course Name",
             "CourseDuration":"Course Duration",
             "WeeklyClass":"Weekly Class",

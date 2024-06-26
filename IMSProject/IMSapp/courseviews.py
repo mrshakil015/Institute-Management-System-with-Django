@@ -1,8 +1,24 @@
 from django.shortcuts import render,redirect
+from IMSapp.forms import *
 
 ##courses
 def addcourse(request):
-    return render(request,'courses/addcourse.html')
+    
+    if request.method == 'POST':
+        courseform=CourseInfoForm(request.POST, request.FILES)
+        
+        if courseform.is_valid():
+            courseform.save()
+            return redirect('courselist')           
+    else:
+        courseform=CourseInfoForm()
+    
+    
+    context = {
+        'courseform':courseform,
+    }
+    
+    return render(request,'courses/addcourse.html',context)
 
 
 def courselist(request):
