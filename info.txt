@@ -4,5 +4,7 @@ Admin Panel
 
 Authority
     username = ims121
-    password = 1234
-    
+    password = 1234  
+
+Authority Create using shell:
+    IMSUserModel.objects.create_user(username='ims121',password='1234',UserType='Authority')

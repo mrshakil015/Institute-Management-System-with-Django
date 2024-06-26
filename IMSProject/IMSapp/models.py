@@ -28,11 +28,17 @@ class PersonalInfoModel(models.Model):
     PresentAddress=models.CharField(max_length=100,null=True)
     PermanentAddress=models.CharField(max_length=100,null=True)
 
+class CourseCategoryModel(models.Model):
+    CategoryName = models.CharField(max_length=100,null=True)
+    
+    def __str__(self):
+        return self.CategoryName
+
 class CourseInfoModel(models.Model):
     CourseName=models.CharField(max_length=150, null=True)
     Sologan=models.CharField(max_length=100, null=True)
     ShortSummary=models.CharField(max_length=150, null=True)
-    CourseCategory=models.CharField(max_length=100, null=True)
+    CourseCategory=models.ForeignKey(CourseCategoryModel,on_delete=models.SET_NULL,related_name='coursecategory', null=True) 
     Lecture=models.IntegerField(null=True)
     CourseDuration=models.IntegerField(null=True)
     WeeklyClass=models.IntegerField(null=True)

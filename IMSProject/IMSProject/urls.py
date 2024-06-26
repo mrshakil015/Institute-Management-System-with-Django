@@ -26,6 +26,9 @@ urlpatterns = [
     path('deletecontact/<str:myid>',deletecontact,name="deletecontact"),
     
     #----------Courses------------
+    
+    path('categorylist/',categorylist,name="categorylist"),
+    path('addcategory/',addcategory,name="addcategory"),
     path('addcourse/',addcourse,name="addcourse"),
     path('courselist/',courselist,name="courselist"),
     path('editcourse/<str:myid>',editcourse,name="editcourse"),

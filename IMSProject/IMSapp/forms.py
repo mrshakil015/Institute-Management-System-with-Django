@@ -1,6 +1,15 @@
 from django import forms
 from IMSapp.models import *
 
+class CourseCategoryForm(forms.ModelForm):
+    class Meta:
+        model = CourseCategoryModel
+        fields = "__all__"
+        
+        labels = {
+            "CategoryName":"Category Name"
+        }
+
 class CourseInfoForm(forms.ModelForm):
     class Meta:
         model = CourseInfoModel

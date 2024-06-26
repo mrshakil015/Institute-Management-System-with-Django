@@ -8,6 +8,7 @@ admin.site.register(IMSUserModel,IMSUserModel_Display)
 class PersonalInfoModel_Display(admin.ModelAdmin):
     list_display=['Imsuser','Mobile']
 admin.site.register(PersonalInfoModel,PersonalInfoModel_Display)
+admin.site.register(CourseCategoryModel)
 
 
 class CourseInfoModel_Dispaly(admin.ModelAdmin):
