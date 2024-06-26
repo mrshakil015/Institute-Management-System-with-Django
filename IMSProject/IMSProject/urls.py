@@ -28,7 +28,8 @@ urlpatterns = [
     
     path('addcourse/',addcourse,name="addcourse"),
     path('courselist/',courselist,name="courselist"),
-    path('editcourse/',editcourse,name="editcourse"),
+    path('editcourse/<str:myid>',editcourse,name="editcourse"),
+    path('deletecourse/<str:myid>',deletecourse,name="deletecourse"),
     path('viewcourse/',viewcourse,name="viewcourse"),
 
     #student

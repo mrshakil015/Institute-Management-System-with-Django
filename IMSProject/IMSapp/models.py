@@ -29,14 +29,20 @@ class PersonalInfoModel(models.Model):
     PermanentAddress=models.CharField(max_length=100,null=True)
 
 class CourseInfoModel(models.Model):
-    CourseName=models.CharField(max_length=100, null=True)
-    CourseDuration=models.CharField(max_length=100, null=True)
-    WeeklyClass=models.CharField(max_length=100, null=True)
-    ClassDurationHour=models.CharField(max_length=100, null=True)
-    ClassDurationMinute=models.CharField(max_length=100, null=True)
-    CourseFee=models.CharField(max_length=100, null=True)
-    AboutCourse=models.TextField(null=True)
-    CourseTopics=models.CharField(max_length=100, null=True)
+    CourseName=models.CharField(max_length=150, null=True)
+    Sologan=models.CharField(max_length=100, null=True)
+    Lecture=models.IntegerField(null=True)
+    CourseDuration=models.IntegerField(null=True)
+    WeeklyClass=models.IntegerField(null=True)
+    ClassDuration=models.IntegerField(null=True)
+    TotalProject=models.IntegerField(null=True)
+    CourseOverview=models.TextField(null=True)
+    CourseCurrriculum=models.TextField(null=True)
+    Software=models.TextField(max_length=200, null=True)
+    CourseFor=models.TextField(null=True)
+    JobPositions=models.TextField(null=True)
+    CourseFee=models.IntegerField(null=True)
+    IntroVideo=models.CharField(max_length=200, null=True)
     CourseImage=models.ImageField(upload_to='media/courseImage', null=True)
 
 class StudentModel(models.Model):

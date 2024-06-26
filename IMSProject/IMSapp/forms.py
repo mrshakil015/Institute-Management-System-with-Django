@@ -8,13 +8,18 @@ class CourseInfoForm(forms.ModelForm):
         
         labels = {
             "CourseName":"Course Name",
+            "Lecture":"No of Lecture",
             "CourseDuration":"Course Duration",
             "WeeklyClass":"Weekly Class",
-            "ClassDurationHour":"Class Duration Hour",
-            "ClassDurationMinute":"Class Duration Minute",
+            "ClassDuration":"Class Duration(in Minutes)",
+            "TotalProject":"Total Project",
+            "CourseOverview":"Course Overview",
+            "CourseCurrriculum":"Course Currriculum",
+            "Software":"Course Software",
+            "CourseFor":"Course For",
+            "JobPositions":"Job Positions",
             "CourseFee":"Course Fee",
-            "AboutCourse":"About Course",
-            "CourseTopics":"Course Topics",
+            "IntroVideo":"Intro Video Link",
             "CourseImage":"Course Image",
         }
  
