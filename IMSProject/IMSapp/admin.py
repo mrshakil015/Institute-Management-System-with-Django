@@ -42,7 +42,7 @@ class SalaryModel_Display(admin.ModelAdmin):
     list_display=['Imsuser','Salary']
 admin.site.register(SalaryModel,SalaryModel_Display)
 
-admin.site.register(ContactModel)
+admin.site.register(WebsiteContactModel)
         
 
                     

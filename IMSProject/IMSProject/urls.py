@@ -8,15 +8,20 @@ from IMSapp.studentviews import *
 from IMSapp.batchviews import *
 from IMSapp.teacherviews import *
 from IMSapp.staffviews import *
+from IMSapp.contactviews import *
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homepage,name="homepage"),
-    path('contactpage/',contactpage,name="contactpage"),
     path('dashboard/',dashboard,name="dashboard"),
     path('loginpage/',loginpage,name="loginpage"),
     path('logoutPage/',logoutPage,name="logoutPage"),
+    
+    #----------Contact------------
+    path('contactpage/',contactpage,name="contactpage"),
+    path('addcontact/',addcontact,name="addcontact"),
+    path('contactlist/',contactlist,name="contactlist"),
     
     ##courses
     

@@ -60,7 +60,7 @@ class BatchInfoModel(models.Model):
     BatchInstructor=models.CharField(max_length=100,null=True)
 
 class TeacherModel(models.Model):
-    Imsuser=models.OneToOneField(IMSUserModel,on_delete=models.CASCADE,related_name='teacherinfo',null=True)
+    Imsuser=models.CharField(max_length=50,null=True)
     EmployID=models.CharField(max_length=100,null=True)
     TeacherName=models.CharField(max_length=100,null=True)
     Designation=models.CharField(max_length=100,null=True)
@@ -70,7 +70,8 @@ class TeacherModel(models.Model):
     FacebookLink =models.CharField(max_length=150,null=True)
     JoinDate = models.DateField(auto_now_add=True,null=True)
     
-class ContactModel(models.Model):
+class WebsiteContactModel(models.Model):
+    Imsuser = models.OneToOneField(IMSUserModel,on_delete=models.CASCADE,null=True)
     Mobile = models.CharField(max_length=50,null=True)
     Address = models.CharField(max_length=100,null=True)
     Email = models.CharField(max_length=100,null=True)

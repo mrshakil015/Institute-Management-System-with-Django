@@ -12,13 +12,6 @@ def dashboard(request):
     
     return render(request,'common/dashboard.html')
 
-def contactpage(request):
-    
-    context = {
-        'pagetitle':'Contact US'
-    }
-    return render(request,'common/contact.html',context)
-
 def loginpage(request):
     if request.method == 'POST':
         username = request.POST.get('username')

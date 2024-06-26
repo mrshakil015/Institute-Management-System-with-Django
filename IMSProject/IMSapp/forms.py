@@ -111,6 +111,11 @@ class BatchInfoForm(forms.ModelForm):
             "BatchStartDate":"Batch Start Date",
             "TotalStudent":"Total Student",
             "BatchInstructor":"Batch Instructor",
-
         }
 
+class WebsiteContacForm(forms.ModelForm):
+    class Meta:
+        model = WebsiteContactModel
+        fields = "__all__"
+        exclude = ['Imsuser']
+    
