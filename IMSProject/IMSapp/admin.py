@@ -33,7 +33,11 @@ class StaffModel_Display(admin.ModelAdmin):
     list_display=['Imsuser','StaffName','EmployID']
 admin.site.register(StaffModel,StaffModel_Display)
 
-##Salary Model needs to be registered
+class AdmittedCourseModel_Display(admin.ModelAdmin):
+    list_display=['Courseuser','CourseName']
+admin.site.register(AdmittedCourseModel,AdmittedCourseModel_Display)
+
+##Salary Model
 class SalaryModel_Display(admin.ModelAdmin):
     list_display=['Imsuser','Salary']
 admin.site.register(SalaryModel,SalaryModel_Display)

@@ -41,9 +41,10 @@ class CourseInfoModel(models.Model):
 
 class StudentModel(models.Model):
     Imsuser=models.OneToOneField(IMSUserModel,on_delete=models.CASCADE,related_name='studentinfo',null=True)
+    StudentID=models.CharField(max_length=100,null=True)
     StudentName=models.CharField(max_length=100,null=True)
     StudentPhoto=models.ImageField(upload_to='media/studentPhoto',null=True)
-    AdmissionDate=models.DateField(null=True)
+    AdmissionDate=models.DateField(auto_now_add=True,null=True)
     EducationalQualification=models.CharField(max_length=100,null=True)
     LinkedInLink =models.CharField(max_length=150,null=True)
     GithubLink =models.CharField(max_length=150,null=True)
@@ -84,15 +85,15 @@ class ContactModel(models.Model):
 
 ## AdmittedCourseModel
 
-class AdmittedCourseModel:
-    Courseuser=models.OneToOneField(StudentModel,on_delete=models.CASCADE,null=True)
+class AdmittedCourseModel(models.Model):
+    Courseuser=models.OneToOneField(IMSUserModel,on_delete=models.CASCADE,null=True)
     AssignTeacher=models.ForeignKey(TeacherModel,on_delete=models.CASCADE,null=True)
     LearningBatch=models.OneToOneField(BatchInfoModel,on_delete=models.CASCADE,null=True)
     CourseName=models.ForeignKey(CourseInfoModel,on_delete=models.CASCADE,null=True)
     CourseFee=models.CharField(max_length=150,null=True)
     Payment=models.CharField(max_length=150,null=True)
     Due=models.CharField(max_length=150,null=True)
-    AdmissionDate=models.DateField(null=True) 
+    AdmissionDate=models.DateField(auto_now_add=True,null=True) 
 
 
 ## StaffModel

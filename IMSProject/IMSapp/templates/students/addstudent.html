@@ -53,12 +53,18 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-12">
-                            <h5 class="form-title"><span>Student Information</span></h5>
+                            <h5 class="form-title"><span><strong>Student Personal Information</strong></span></h5>
+                            <hr>
                         </div>
-                        {{form}}
-                        {{form2}}
+                        {{studentform}}
+                        {{personalform}}
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <h5 class="form-title"><span><strong>Course Information</strong></span></h5>
+                            <hr>
+                        </div>
+                        {{courseform}}
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Student</button>
                         </div>
                     </div>
                 </form>

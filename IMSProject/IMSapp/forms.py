@@ -5,6 +5,7 @@ class CourseInfoForm(forms.ModelForm):
     class Meta:
         model = CourseInfoModel
         fields = "__all__"
+        exclude = ['Imsuser']
         lebels = {
             "CourseName":"Course Name",
             "CourseDuration":"Course Duration",
@@ -16,12 +17,53 @@ class CourseInfoForm(forms.ModelForm):
             "CourseTopics":"Course Topics",
             "CourseImage":"Course Image",
         }
+ 
+class AdmittedCourseForm(forms.ModelForm):
+    class Meta:
+        model = AdmittedCourseModel
+        fields = "__all__"  
+        exclude = ['Courseuser','CourseName','LearningBatch','AssignTeacher','AdmissionDate','Due']
+        
+        labels = {
+            "LearningBatch":"Batch No",
+            "CourseName":"Course Name",
+            "CourseFee":"Course Fee",
+        }    
+
+class PersonalInfoForm(forms.ModelForm):
+    class Meta:
+        model = PersonalInfoModel
+        fields = "__all__"
+        exclude = ['Imsuser']
+        
+        widgets = {
+            'DOB':forms.DateInput(attrs={
+                'type': 'date'
+            }),
+        }
+        
+        labels = {
+            "FatherName": "Father Name",
+            "MotherName": "Mother Name",
+            "DOB": "Date of Birth",
+            "EmergencyContact": "Emergency Contact",
+            "PresentAddress": "Present Address",
+            "PermanentAddress": "Permanent Address",
+        }
 
 class StudentForm(forms.ModelForm):
     class Meta:
         model = StudentModel
         fields = "__all__"
+        exclude = ['Imsuser','StudentPhoto','AdmissionDate','LinkedInLink','GithubLink','FacebookLink']
+        
+        widgets = {
+            'AdmissionDate':forms.DateInput(attrs={
+                'type':'date'
+            }),
+        }
         labels = {
+            "StudentID":"Student ID No",
             "StudentName":"Student Name",
             "StudentPhoto":"Student Photo",
             "AdmissionDate":"Admission Date",
@@ -30,7 +72,6 @@ class StudentForm(forms.ModelForm):
             "GithubLink":"Github Link",
             "FacebookLink":"Facebook Link",
         }
-        #exclude = []
 
 class TeacherForm(forms.ModelForm):
     class Meta:
@@ -72,4 +113,4 @@ class BatchInfoForm(forms.ModelForm):
             "BatchInstructor":"Batch Instructor",
 
         }
-        #exclude = []
+
