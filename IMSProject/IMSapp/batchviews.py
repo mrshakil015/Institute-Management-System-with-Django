@@ -1,13 +1,13 @@
 from django.shortcuts import redirect, render
 
 def addbatch(request):
-    return render("batches/addbatch.html")
+    return render(request,"batches/addbatch.html")
 
 def batchlist(request):
-    return render("batches/batchlist.html")
+    return render(request,"batches/batchlist.html")
 
 def editbatch(request):
-    return render("batches/editbatch.html")
+    return render(request,"batches/editbatch.html")
 
 def viewbatch(request):
-    return render("batches/viewbatch.html")     
+    return render(request,"batches/viewbatch.html")     

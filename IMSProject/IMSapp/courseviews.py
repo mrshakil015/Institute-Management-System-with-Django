@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 ##courses
 def addcourse(request):
-    return render(request,'courses/addcourse.html.html')
+    return render(request,'courses/addcourse.html')
 
 
 def courselist(request):
