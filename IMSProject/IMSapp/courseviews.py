@@ -1,13 +1,16 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib.auth.decorators import login_required
 from IMSapp.forms import *
 import os
 
 #------------Course Category---------
+@login_required
 def categorylist(request):
     categorydata = CourseCategoryModel.objects.all()
     
     return render(request,'courses/categorylist.html',{'categorydata':categorydata})
 
+@login_required
 def addcategory(request):
     if request.method == 'POST':
         categoryform = CourseCategoryForm(request.POST)
@@ -19,7 +22,26 @@ def addcategory(request):
     
     return render(request,'courses/addcategory.html',{'categoryform':categoryform})
 
+@login_required
+def editcategory(request,myid):
+    categorydata = get_object_or_404(CourseCategoryModel, id=myid)
+    if request.method == 'POST':
+        categoryform = CourseCategoryForm(request.POST, instance=categorydata)
+        if categoryform.is_valid():
+            categoryform.save()
+            return redirect('categorylist')
+    else:
+        categoryform = CourseCategoryForm(instance=categorydata)
+    return render(request,'courses/editcategory.html',{'categoryform':categoryform})
+
+@login_required
+def deletecategory(request,myid):
+    categorydata = get_object_or_404(CourseCategoryModel,id=myid)
+    categorydata.delete()
+    return redirect('categorylist')
+
 #------------Admin Courses-------------
+@login_required
 def addcourse(request):
     if request.method == 'POST':
         courseform=CourseInfoForm(request.POST, request.FILES)
@@ -34,6 +56,7 @@ def addcourse(request):
     }
     return render(request,'courses/addcourse.html',context)
 
+@login_required
 def courselist(request):
     coursedata = CourseInfoModel.objects.all()
     context = {
@@ -41,6 +64,7 @@ def courselist(request):
     }
     return render(request,'courses/courselist.html',context)
 
+@login_required
 def editcourse(request,myid):
     coursedata = get_object_or_404(CourseInfoModel,id=myid)
     img = coursedata.CourseImage
@@ -61,6 +85,7 @@ def editcourse(request,myid):
     }
     return render(request,'courses/editcourse.html',context)
 
+@login_required
 def deletecourse(request,myid):
     coursedata = get_object_or_404(CourseInfoModel,id=myid)
     img = coursedata.CourseImage
@@ -68,6 +93,7 @@ def deletecourse(request,myid):
     coursedata.delete()
     return redirect('courselist')
 
+@login_required
 def viewcourse(request):
     return render(request,'courses/viewcourse.html')
 
