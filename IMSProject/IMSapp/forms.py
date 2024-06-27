@@ -108,7 +108,7 @@ class StaffForm(forms.ModelForm):
         model = StaffModel
         fields = "__all__"
 
-        leable = {
+        labels = {
             "StaffName":"Staff Name",
             "EmployID":"Employ ID",
             "StaffDesignation":"Staff Designation",
@@ -121,7 +121,7 @@ class BatchInfoForm(forms.ModelForm):
         model = BatchInfoModel
         fields = "__all__"
 
-        leable = {
+        labels = {
             "BatchNo":"Batch No",
             "Batchschedule":"Batchs Chedule",
             "BatchStartDate":"Batch Start Date",
