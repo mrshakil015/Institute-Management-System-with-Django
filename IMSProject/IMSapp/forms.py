@@ -107,6 +107,7 @@ class StaffForm(forms.ModelForm):
     class Meta:
         model = StaffModel
         fields = "__all__"
+        exclude =["Imsuser"]
 
         labels = {
             "StaffName":"Staff Name",
