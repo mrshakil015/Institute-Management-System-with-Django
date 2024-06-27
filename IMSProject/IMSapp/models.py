@@ -52,6 +52,9 @@ class CourseInfoModel(models.Model):
     CourseFee=models.IntegerField(null=True)
     IntroVideo=models.CharField(max_length=200, null=True)
     CourseImage=models.ImageField(upload_to='media/courseImage', null=True)
+    
+    def __str__(self):
+        return self.CourseName
 
 class StudentModel(models.Model):
     Imsuser=models.OneToOneField(IMSUserModel,on_delete=models.CASCADE,related_name='studentinfo',null=True)
@@ -71,6 +74,7 @@ class BatchInfoModel(models.Model):
     BatchStartDate=models.DateField(null=True)
     TotalStudent=models.CharField(max_length=100,null=True)
     BatchInstructor=models.CharField(max_length=100,null=True)
+    CourseName=models.OneToOneField(CourseInfoModel,on_delete = models.SET_NULL,related_name='coursenameinfo',null=True)
 
 class TeacherModel(models.Model):
     Imsuser = models.OneToOneField(IMSUserModel,on_delete=models.CASCADE,related_name='teacherinfo',null=True)

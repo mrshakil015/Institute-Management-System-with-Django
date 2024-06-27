@@ -125,8 +125,9 @@ class BatchInfoForm(forms.ModelForm):
             "BatchNo":"Batch No",
             "Batchschedule":"Batchs Chedule",
             "BatchStartDate":"Batch Start Date",
-            "TotalStudent":"Total Student",
+            "TotalStudent":"Total Seat",
             "BatchInstructor":"Batch Instructor",
+            "CourseName":"Course Name",
         }
 
 class WebsiteContacForm(forms.ModelForm):
