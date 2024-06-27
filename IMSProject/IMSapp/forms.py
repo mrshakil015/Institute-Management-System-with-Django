@@ -101,7 +101,7 @@ class TeacherForm(forms.ModelForm):
             "FacebookLink":"Facebook Link",
             "JoinDate":"Join Date",
         }
-        #exclude = []
+        exclude = ['Imsuser']
 
 class StaffForm(forms.ModelForm):
     class Meta:
