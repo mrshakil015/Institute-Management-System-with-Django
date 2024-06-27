@@ -50,10 +50,11 @@ urlpatterns = [
     path('teacherlist/',teacherlist,name="teacherlist"),
     path('viewteacher/',viewteacher,name="viewteacher"),
 
-    #batches
+    #------------Batches---------------
     path('addbatch/',addbatch,name="addbatch"),
     path('batchlist/',batchlist,name="batchlist"),
-    path('editbatch/',editbatch,name="editbatch"),
+    path('editbatch/<str:myid>',editbatch,name="editbatch"),
+    path('deletebatch/<str:myid>',deletebatch,name="deletebatch"),
     path('viewbatch/',viewbatch,name="viewbatch"),
 
     #staff

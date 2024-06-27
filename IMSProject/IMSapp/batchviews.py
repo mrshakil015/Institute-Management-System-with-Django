@@ -1,20 +1,51 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
+from django.contrib.auth.decorators import login_required
 from IMSapp.models import *
 from IMSapp.forms import *
 
+@login_required
 def addbatch(request):
-    batchform = BatchInfoForm()
-    
+    if request.method == 'POST':
+        batchform = BatchInfoForm(request.POST)
+        if batchform.is_valid():
+            batchform.save()
+            return redirect('batchlist')
+    else:
+        batchform = BatchInfoForm()
     context = {
         'batchform':batchform,
     }
     return render(request,"batches/addbatch.html",context)
 
+@login_required
 def batchlist(request):
-    return render(request,"batches/batchlist.html")
+    batchdata = BatchInfoModel.objects.all()
+    context = {
+        'batchdata':batchdata
+    }
+    return render(request,"batches/batchlist.html",context)
 
-def editbatch(request):
-    return render(request,"batches/editbatch.html")
+@login_required
+def editbatch(request,myid):
+    batchdata= get_object_or_404(BatchInfoModel,id=myid)
+    if request.method == 'POST':
+        batchform = BatchInfoForm(request.POST,instance=batchdata)
+        if batchform.is_valid():
+            batchform.save()
+            return redirect('batchlist')
+    else:
+        batchform = BatchInfoForm(instance=batchdata)
+    context = {
+        'batchform':batchform,
+    }
+    return render(request,"batches/editbatch.html",context)
 
+@login_required
+def deletebatch(request,myid):
+    batchdata= get_object_or_404(BatchInfoModel,id=myid)
+    batchdata.delete()
+    return redirect('batchlist')
+
+@login_required
 def viewbatch(request):
     return render(request,"batches/viewbatch.html")     

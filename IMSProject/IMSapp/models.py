@@ -70,7 +70,12 @@ class StudentModel(models.Model):
 class BatchInfoModel(models.Model):
     BatchNo=models.CharField(max_length=100,null=True)
     Batchschedule=models.CharField(max_length=100,null=True)
-    Status=models.CharField(max_length=100,null=True)
+    STATUS = [
+        ('On-Going','On-Going'),
+        ('Upcomming','Upcomming'),
+        ('Completed','Completed')
+    ]
+    Status=models.CharField(choices = STATUS, max_length=100,null=True)
     BatchStartDate=models.DateField(null=True)
     TotalStudent=models.CharField(max_length=100,null=True)
     BatchInstructor=models.CharField(max_length=100,null=True)

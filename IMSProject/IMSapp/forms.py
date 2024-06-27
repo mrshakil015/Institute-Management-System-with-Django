@@ -113,17 +113,34 @@ class StaffForm(forms.ModelForm):
             "EmployID":"Employ ID",
             "StaffDesignation":"Staff Designation",
             "JoinDate":"Join Date",
-                    }
-        #exclude = []
+
+        }
 
 class BatchInfoForm(forms.ModelForm):
     class Meta:
         model = BatchInfoModel
         fields = "__all__"
 
+        widgets = {
+            'BatchStartDate':forms.DateInput(attrs={
+                'type':'date'
+            }),
+            'BatchNo': forms.TextInput(attrs={
+                'placeholder': 'Example: 75'
+            }),
+            'Batchschedule': forms.TextInput(attrs={
+                'placeholder': 'Example: Sat, Mon, Wed'
+            }),
+            'TotalStudent': forms.TextInput(attrs={
+                'placeholder': 'Example: 25'
+            }),
+            'BatchInstructor': forms.TextInput(attrs={
+                'placeholder': 'Example: 20012, 24022'
+            }),
+        }
         labels = {
             "BatchNo":"Batch No",
-            "Batchschedule":"Batchs Chedule",
+            "Batchschedule":"Batchs Schedule",
             "BatchStartDate":"Batch Start Date",
             "TotalStudent":"Total Seat",
             "BatchInstructor":"Instructor ID No",
