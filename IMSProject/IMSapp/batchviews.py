@@ -24,7 +24,6 @@ def batchlist(request):
     
     for data in batchdata:
         enrolledstudent = AdmittedCourseModel.objects.filter(LearningBatch=data).count()
-        print(enrolledstudent)
         combined_data.append({
             'batchdata': data, 
             'enrolledstudent': enrolledstudent,

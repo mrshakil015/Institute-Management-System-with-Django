@@ -58,6 +58,12 @@ h6 {
   font-family: var(--heading-font);
 }
 
+.btn-primary {
+  background: #127e80 !important;
+  border-color: #127e80 !important;
+  color: #fff !important;
+}
+
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
@@ -724,7 +730,7 @@ section,
 # Global Section Titles
 --------------------------------------------------------------*/
 .section-title {
-  padding-bottom: 60px;
+  padding-bottom: 20px;
   position: relative;
 }
 
@@ -1001,6 +1007,89 @@ section,
   color: var(--contrast-color);
   background: var(--accent-color);
 }
+/*--------------------------------------------------------------
+# Features Section
+--------------------------------------------------------------*/
+.batchfeatures {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.batchfeatures .items {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  gap: 5px; /* Add 5px margin between items */
+}
+
+.batchfeatures .nav-item {
+  background-color: var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 30px;
+  transition: 0.3s;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: 5px; /* Add margin to each nav-item */
+  flex: 1; /* Ensure all nav-items take up equal width */
+  max-width: 180px; /* Optional: set a maximum width if you want to limit the width */
+}
+
+.batchfeatures .nav-item:hover {
+  background-color: #fff; 
+  color: #127e80;
+}
+
+.batchfeatures .icon-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.batchfeatures .nav-item i {
+  font-size: 32px;
+  line-height: 0;
+  color: #fff;
+  margin-right: 10px; /* Add some spacing between icon and text */
+}
+
+.batchfeatures .nav-item:hover i,
+.batchfeatures .nav-item:hover h3 {
+  color: var(--accent-color);
+}
+
+.batchfeatures .nav-item h3 {
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 16px;
+  color: #fff;
+}
+
+.batchfeatures .nav-item a {
+  color: #fff;
+  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.batchfeatures .nav-item a h3:hover {
+  color: var(--accent-color);
+}
+
+.batchfeatures .nav-item:hover {
+  border-color: var(--accent-color);
+}
+
+.batchfeatures .nav-item:hover a {
+  color: #127e80;
+}
+
+
+
 
 /*--------------------------------------------------------------
 # Features Section
@@ -1057,6 +1146,9 @@ section,
 }
 .courses .course-item img {
   border-radius: 10px;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
 }
 
 .courses .course-item:hover {
@@ -1133,6 +1225,10 @@ section,
 
 .courses .trainer .trainer-rank .user-icon {
   font-size: 22px;
+}
+.courses .trainer .trainer-rank p {
+  font-size: 18px;
+  padding: 5px 20px;
 }
 
 /*--------------------------------------------------------------

@@ -8,12 +8,17 @@ from IMSapp.models import *
 def homepage(request):
     coursedata = CourseInfoModel.objects.all()
     categorydata = CourseCategoryModel.objects.all()
+    studentdata = StudentModel.objects.all()
+    batchdata = BatchInfoModel.objects.all()
     
     coursecount = coursedata.count()
+    studentcount = studentdata.count()
     context = {
         'coursedata':coursedata,
         'categorydata':categorydata,
         'coursecount':coursecount,
+        'batchdata':batchdata,
+        'studentcount':studentcount,
     }
     return render(request,'common/homepage.html',context)
 
