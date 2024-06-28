@@ -50,8 +50,40 @@ def homepage(request):
 
 @login_required
 def dashboard(request):
+    coursedata = CourseInfoModel.objects.all()
+    categorydata = CourseCategoryModel.objects.all()
+    studentdata = StudentModel.objects.all()
+    batchdata = BatchInfoModel.objects.all()
+    teacherdata = TeacherModel.objects.all()
+    admittedcourse = AdmittedCourseModel.objects.all()
     
-    return render(request,'common/dashboard.html')
+    totalenrolledstudent = admittedcourse.count()
+    totalteacher = teacherdata.count()
+    totalbatch = batchdata.count()
+    totalcourse = coursedata.count()
+    
+    combined_data = []
+    
+    for data in batchdata:
+        enrolledstudent = AdmittedCourseModel.objects.filter(LearningBatch=data).count()
+        combined_data.append({
+            'batchdata': data, 
+            'enrolledstudent': enrolledstudent,
+        })
+    
+    context = {
+        'teacherdata':teacherdata,
+        'coursedata':coursedata,
+        'categorydata':categorydata,
+        'studentdata':studentdata,
+        'totalenrolledstudent':totalenrolledstudent,
+        'totalteacher':totalteacher,
+        'totalbatch':totalbatch,
+        'totalcourse':totalcourse,
+        'combined_data':combined_data,
+    }
+    
+    return render(request,'common/dashboard.html',context)
 
 def loginpage(request):
     if request.method == 'POST':
@@ -59,6 +91,7 @@ def loginpage(request):
         password = request.POST.get('password')
         
         user = authenticate(username=username,password=password)
+        print("user is: ",user)
         if user:
             login(request,user)
             return redirect('dashboard')

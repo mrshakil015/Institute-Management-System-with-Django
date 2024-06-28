@@ -67,6 +67,7 @@ def editstudent(request, myid):
         if studentform.is_valid() and personalform.is_valid():
             student = studentform.save(commit=False)
             image = student.StudentPhoto
+            print(image)
             if image != img:
                 os.remove(img.path)
             student.save()
