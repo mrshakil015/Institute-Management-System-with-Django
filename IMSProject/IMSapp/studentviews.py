@@ -84,9 +84,6 @@ def studentlist(request):
     combined_data = [] 
     for student in studentdata:
         personal_info = personaldata.filter(Imsuser=student.Imsuser).first()
-        print("personal info1: ",student)
-        print("personal info: ",personal_info)
-        print(personal_info.FatherName)
         combined_data.append({
             'student': student,
             'personal_info': personal_info
@@ -125,7 +122,6 @@ def enrollcourse(request):
             if student_exists:
                 student = get_object_or_404(IMSUserModel, username=studentid)
                 batchno = courseenroll.LearningBatch
-                print("Batch number: ", batchno)
                 
                 # Check if the student is already enrolled in the batch
                 batch_exists = AdmittedCourseModel.objects.filter(Courseuser=student, LearningBatch=batchno).exists()
@@ -166,7 +162,6 @@ def editenrollcourse(request, myid):
             if student_exists:
                 student = get_object_or_404(IMSUserModel, username=studentid)
                 batchno = courseenroll.LearningBatch
-                print("Batch number: ", batchno)
                 
                 # Check if the student is already enrolled in the batch
                 if batchno != batch:

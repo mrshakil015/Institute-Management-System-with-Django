@@ -20,10 +20,21 @@ def addbatch(request):
 @login_required
 def batchlist(request):
     batchdata = BatchInfoModel.objects.all()
+    combined_data = []
+    
+    for data in batchdata:
+        enrolledstudent = AdmittedCourseModel.objects.filter(LearningBatch=data).count()
+        print(enrolledstudent)
+        combined_data.append({
+            'batchdata': data, 
+            'enrolledstudent': enrolledstudent,
+        })
+        
     context = {
-        'batchdata':batchdata
+        'combined_data': combined_data
     }
-    return render(request,"batches/batchlist.html",context)
+    return render(request, "batches/batchlist.html", context)
+
 
 @login_required
 def editbatch(request,myid):
