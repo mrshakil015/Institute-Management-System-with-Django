@@ -38,8 +38,7 @@ def addteacher(request):
 @login_required
 def editteacher(request,teacherid):
     teacherdata = get_object_or_404(TeacherModel,id=teacherid)
-    teacherid = teacherdata.EmployID
-    personaldata = get_object_or_404(PersonalInfoModel,EmployID=teacherid)
+    personaldata = get_object_or_404(PersonalInfoModel,Imsuser=teacherdata.Imsuser)
     if request.method == 'POST':
         teacherform = TeacherForm(request.POST,instance=teacherdata)
         personalform = PersonalInfoForm(request.POST,instance=personaldata)
