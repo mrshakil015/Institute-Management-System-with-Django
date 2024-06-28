@@ -11,6 +11,7 @@ def homepage(request):
     studentdata = StudentModel.objects.all()
     batchdata = BatchInfoModel.objects.all()
     teacherdata = TeacherModel.objects.all()
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     
     
     coursecount = coursedata.count()
@@ -22,24 +23,26 @@ def homepage(request):
     
     #------No of Student in a Course
     coursestudent = []
+    enrolledstudent = 0
     for course in coursedata:
         nostudent = AdmittedCourseModel.objects.filter(CourseName=course).count()
+        enrolledstudent += nostudent
         coursestudent.append({
             'course':course,
             'student':nostudent,
         })
-        
-    print(coursestudent)
     
     context = {
         'teacherdata':teacherdata,
         'teachercount':teachercount,
         'coursestudent':coursestudent,
         'coursedata':coursedata,
+        'contactdata':contactdata,
         'categorydata':categorydata,
         'coursecount':coursecount,
         'batchdata':batchdata,
         'studentcount':studentcount,
+        'enrolledstudent':enrolledstudent,
         'batchcount':batchcount,
         'path':current_path,
     }
@@ -70,11 +73,13 @@ def logoutPage(request):
 
 def teachers(request):
     teacherdata = TeacherModel.objects.all()
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
     context = {
         'pagetitle':'Meet with Our Makers',
         'subtitle':'Trainers',
         'teacherdata':teacherdata,
+        'contactdata':contactdata,
         'path':current_path,
     }
     return render(request,'common/teachers.html',context)
@@ -82,11 +87,23 @@ def teachers(request):
 
 def courses(request):
     coursedata = CourseInfoModel.objects.all()
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    
+    #------No of Student in a Course
+    coursestudent = []
+    for course in coursedata:
+        nostudent = AdmittedCourseModel.objects.filter(CourseName=course).count()
+        coursestudent.append({
+            'course':course,
+            'student':nostudent,
+        })
     current_path = request.path
     context = {
         'pagetitle':'All Courses',
         'subtitle':'Courses',
         'coursedata':coursedata,
+        'coursestudent':coursestudent,
+        'contactdata':contactdata,
         'path':current_path,
     }
     
@@ -94,11 +111,14 @@ def courses(request):
 
 def batches(request):
     batchdata = BatchInfoModel.objects.all()
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
     print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
+        'headtitle': 'List of All Batches',
+        'contactdata':contactdata,
         'batchdata':batchdata,
         'path':current_path,
     }
@@ -107,11 +127,14 @@ def batches(request):
 
 def upcommingbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='Upcomming')
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
     print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
+        'headtitle': 'List of Upcomming Batches',
+        'contactdata':contactdata,
         'batchdata':batchdata,
         'path':current_path,
     }
@@ -120,11 +143,14 @@ def upcommingbatch(request):
 
 def ongoingbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='On-Going')
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
     print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
+        'headtitle': 'List of On-Going Batches',
+        'contactdata':contactdata,
         'batchdata':batchdata,
         'path':current_path,
     }
@@ -133,22 +159,27 @@ def ongoingbatch(request):
 
 def completedbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='Completed')
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
     print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
+        'headtitle': 'List of Completed Batches',
         'batchdata':batchdata,
+        'contactdata':contactdata,
         'path':current_path,
     }
     
     return render(request,'common/completedbatch.html',context)
 
 def contactpage(request):
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
     context = {
         'pagetitle':'Contact US',
         'subtitle':'Contact',
+        'contactdata':contactdata,
         'path':current_path,
     }
     return render(request,'contact/contact.html',context)

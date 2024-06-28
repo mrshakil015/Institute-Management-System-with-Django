@@ -182,4 +182,12 @@ class WebsiteContacForm(forms.ModelForm):
         model = WebsiteContactModel
         fields = "__all__"
         exclude = ['Imsuser']
+        
+        labels = {
+            "MapLink": "Map Link",
+            "GithubLink": "Linkedin Link",
+            "FacebookLink": "Facebook Link",
+            "YoutubeLink": "Youtube Link",
+            "TwitterLink" : "Twitter Link",
+        }
     
