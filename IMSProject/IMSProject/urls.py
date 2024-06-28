@@ -68,7 +68,8 @@ urlpatterns = [
 
     #staff
     path('addstaff/',addstaff,name="addstaff"),
-    path('editstaff/',editstaff,name="editstaff"),
+    path('editstaff/<str:myid>',editstaff,name="editstaff"),
+    path('deletestaff/<str:myid>',deletestaff,name="deletestaff"),
     path('stafflist/',stafflist,name="stafflist"),
     path('viewstaff/',viewstaff,name="viewstaff"),
     
