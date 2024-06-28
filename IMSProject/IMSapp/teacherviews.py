@@ -2,28 +2,34 @@ from django.shortcuts import render,redirect,get_object_or_404
 from IMSapp.forms import *
 from IMSapp.models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 @login_required
 def addteacher(request):
     if request.method == 'POST':
-        teacherform = TeacherForm(request.POST)
+        teacherform = TeacherForm(request.POST,request.FILES)
         personalform = PersonalInfoForm(request.POST)
         if teacherform.is_valid():
             teacher = teacherform.save(commit = False)
             teacherid = teacher.EmployID
             password = teacherid
             usertype = 'Teacher'
+            
+            teacher_exists = IMSUserModel.objects.filter(username=teacherid).exists()
+            if not teacher_exists:
+                teacheruser = IMSUserModel.objects.create_user(username=teacherid,password=password,UserType=usertype)
+                teacheruser.save()
 
-            teacheruser = IMSUserModel.objects.create_user(username=teacherid,password=password,UserType=usertype)
-            teacheruser.save()
-
-            teacher.Imsuser=teacheruser
-            teacher.save()
-            if personalform.is_valid():
-                personalinfo = personalform.save(commit = False)
-                personalinfo.Imsuser = teacheruser
-                personalinfo.save()
-                return redirect('teacherlist')
+                teacher.Imsuser=teacheruser
+                teacher.save()
+                if personalform.is_valid():
+                    personalinfo = personalform.save(commit = False)
+                    personalinfo.Imsuser = teacheruser
+                    personalinfo.save()
+                    messages.success(request,'Successfully Added')
+                    return redirect('teacherlist')
+            else:
+                messages.error(request,'User Already Exists')
     else:
         teacherform = TeacherForm()
         personalform = PersonalInfoForm()
@@ -36,24 +42,32 @@ def addteacher(request):
 
 
 @login_required
-def editteacher(request,teacherid):
-    teacherdata = get_object_or_404(TeacherModel,id=teacherid)
-    personaldata = get_object_or_404(PersonalInfoModel,Imsuser=teacherdata.Imsuser)
+def editteacher(request, teacherid):
+    teacherdata = get_object_or_404(TeacherModel, id=teacherid)
+    personaldata = get_object_or_404(PersonalInfoModel, Imsuser=teacherdata.Imsuser)
+    
     if request.method == 'POST':
-        teacherform = TeacherForm(request.POST,instance=teacherdata)
-        personalform = PersonalInfoForm(request.POST,instance=personaldata)
-        if teacherform.is_valid():
+        teacherform = TeacherForm(request.POST, request.FILES, instance=teacherdata)
+        personalform = PersonalInfoForm(request.POST, instance=personaldata)
+        
+        if teacherform.is_valid() and personalform.is_valid():
+            # Ensure the EmployID is not changed
+            teacherform.instance.EmployID = teacherdata.EmployID
             teacherform.save()
-            return redirect ('teacherlist')     
+            personalform.save()
+            messages.success(request, 'Successfully Updated')
+            return redirect('teacherlist')
     else:
         teacherform = TeacherForm(instance=teacherdata)
         personalform = PersonalInfoForm(instance=personaldata)
-        comtext={
-            'teacherform':teacherform,
-            'personalform':personalform,
-            
-        }
-    return render(request,'teachers/editteacher.html',comtext) 
+    
+    context = {
+        'teacherform': teacherform,
+        'personalform': personalform,
+    }
+    
+    return render(request, 'teachers/editteacher.html', context)
+ 
 
 
 @login_required
@@ -66,6 +80,7 @@ def teacherlist(request):
 def deleteteacher(request,teacherid):
     teacherdata=  get_object_or_404(TeacherModel,id=teacherid)
     teacherdata.delete()
+    messages.success(request,'Successfully Deleted')
     return redirect('teacherlist')
 
 

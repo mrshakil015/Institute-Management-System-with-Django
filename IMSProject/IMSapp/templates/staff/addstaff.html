@@ -49,19 +49,16 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-12">
                             <h5 class="form-title"><span><strong>Staff Personal Information</strong></span></h5>
+                            {% include 'common/messages.html' %}
                             <hr>
                         </div>
                         {{staffform}}
                         {{personalform}}
-                        <div class="col-12">
-                            <h5 class="form-title"><span><strong>Staff Information</strong></span></h5>
-                            <hr>
-                        </div>
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Add Stafft</button>
                         </div>

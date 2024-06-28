@@ -25,18 +25,24 @@ def addstudent(request):
             studentid = student.StudentID
             usertype= 'Student'
             
-            studentuser = IMSUserModel.objects.create_user(username=studentid,password=password,UserType=usertype)
-            studentuser.save()
+            student_exists = IMSUserModel.objects.filter(username=studentid).exists()
             
-            student.Imsuser=studentuser
-            student.save()
-            
-            if personalform.is_valid():
-                personalinfo = personalform.save(commit = False)
-                personalinfo.Imsuser =studentuser
-                personalinfo.Password =password
-                personalinfo.save()
-                return redirect('studentList')
+            if not student_exists:
+                studentuser = IMSUserModel.objects.create_user(username=studentid,password=password,UserType=usertype)
+                studentuser.save()
+                
+                student.Imsuser=studentuser
+                student.save()
+                
+                if personalform.is_valid():
+                    personalinfo = personalform.save(commit = False)
+                    personalinfo.Imsuser =studentuser
+                    personalinfo.Password =password
+                    personalinfo.save()
+                    messages.success(request,'Successfully Added')
+                    return redirect('studentList')
+            else:
+                messages.error(request,'User Already Exists')
     
     else:
         studentform = StudentForm()

@@ -2,11 +2,12 @@ from django.shortcuts import render,redirect,get_object_or_404
 from IMSapp.forms import *
 from IMSapp.models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 @login_required
 def addstaff(request):
     if request.method == 'POST':
-        staffform = StaffForm(request.POST)
+        staffform = StaffForm(request.POST, request.FILES)
         personalform = PersonalInfoForm(request.POST)
         
         if staffform.is_valid():
@@ -15,17 +16,23 @@ def addstaff(request):
             password = EmployID
             userrtype = 'Staff'
             
-            staffuser = IMSUserModel.objects.create_user(username=EmployID,password=password,UserType=userrtype)
-            staffuser.save()
+            staff_exists = IMSUserModel.objects.filter(username=EmployID).exists()
             
-            staff.Imsuser=staffuser
-            staff.save()
-            
-            if personalform.is_valid():
-                personalinfo = personalform.save(commit=False)
-                personalinfo.Imsuser = staffuser
-                personalinfo.save()
-                return redirect('stafflist')
+            if not staff_exists:
+                staffuser = IMSUserModel.objects.create_user(username=EmployID,password=password,UserType=userrtype)
+                staffuser.save()
+                
+                staff.Imsuser=staffuser
+                staff.save()
+                
+                if personalform.is_valid():
+                    personalinfo = personalform.save(commit=False)
+                    personalinfo.Imsuser = staffuser
+                    personalinfo.save()
+                    messages.success(request,'Successfully Added')
+                    return redirect('stafflist')
+            else:
+                messages.error(request,'User Already Exists')
             
     else:
         staffform = StaffForm()
@@ -44,12 +51,13 @@ def editstaff(request, myid):
     personaldata = get_object_or_404(PersonalInfoModel, Imsuser=staffdata.Imsuser)
     
     if request.method == 'POST':
-        staffform = StaffForm(request.POST, instance=staffdata)
+        staffform = StaffForm(request.POST, request.FILES, instance=staffdata)
         personalform = PersonalInfoForm(request.POST, instance=personaldata)
         
         if staffform.is_valid() and personalform.is_valid():
             staffform.save()
             personalform.save()
+            messages.success(request,'Successfully Updated')
             return redirect('stafflist')
     else:
         staffform = StaffForm(instance=staffdata)
@@ -66,6 +74,7 @@ def editstaff(request, myid):
 def deletestaff(request,myid):
     staffdata = get_object_or_404(StaffModel, id=myid)
     staffdata.delete()
+    messages.success(request,'Successfully Deleted')
     return redirect('stafflist')
 
 @login_required

@@ -102,29 +102,49 @@ class TeacherForm(forms.ModelForm):
     class Meta:
         model = TeacherModel
         fields = "__all__"
+        exclude = ['Imsuser','Skills','JoinDate','LinkedInLink','GithubLink','FacebookLink']
         labels = {
-            "EmployID":"Employ ID",
+            "EmployID":"Teacher ID",
             "TeacherName":"Teacher Name",
             "LinkedInLink":"LinkedIn Link",
             "GithubLink":"Github Link",
             "FacebookLink":"Facebook Link",
             "JoinDate":"Join Date",
         }
-        exclude = ['Imsuser']
+        
 
+    def __init__(self, *args, **kwargs):
+        super(TeacherForm, self).__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields['EmployID'].widget.attrs['readonly'] = True
+
+    def clean_EmployID(self):
+        if self.instance and self.instance.pk:
+            return self.instance.EmployID
+        return self.cleaned_data['EmployID']
+    
 class StaffForm(forms.ModelForm):
     class Meta:
         model = StaffModel
         fields = "__all__"
-        exclude =["Imsuser"]
-
+        exclude =["Imsuser","JoinDate"]
         labels = {
             "StaffName":"Staff Name",
             "EmployID":"Employ ID",
             "StaffDesignation":"Staff Designation",
+            "StaffPhoto":"Staff Photo",
             "JoinDate":"Join Date",
 
         }
+    def __init__(self, *args, **kwargs):
+        super(StaffForm, self).__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields['EmployID'].widget.attrs['readonly'] = True
+
+    def clean_EmployID(self):
+        if self.instance and self.instance.pk:
+            return self.instance.EmployID
+        return self.cleaned_data['EmployID']
 
 class BatchInfoForm(forms.ModelForm):
     class Meta:

@@ -95,6 +95,7 @@ class TeacherModel(models.Model):
     GithubLink =models.CharField(max_length=150,null=True)
     FacebookLink =models.CharField(max_length=150,null=True)
     JoinDate = models.DateField(auto_now_add=True,null=True)
+    TeacherPhoto=models.ImageField(upload_to='media/teacherphoto',null=True)
     
 class WebsiteContactModel(models.Model):
     Imsuser = models.CharField(max_length=50,null=True)
@@ -128,6 +129,7 @@ class StaffModel(models.Model):
     EmployID=models.CharField(max_length=150,null=True)
     StaffDesignation=models.CharField(max_length=150,null=True)
     JoinDate = models.DateField(auto_now_add=True,null=True)
+    StaffPhoto=models.ImageField(upload_to='media/staffphoto',null=True)
 
 ## ‍SalaryModel
 

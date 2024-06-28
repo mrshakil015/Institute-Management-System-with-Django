@@ -19,12 +19,14 @@
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Teachert List</h4>
+        {% include 'common/messages.html' %}
       </div>
       <div class="card-body">
         <div class="table-responsive">
           <table id="basic-datatables" class="display table table-striped table-hover">
             <thead>
               <tr>
+                <th>SL No</th>
                 <th>Teacher Name</th>
                 <th>Teacher ID</th>
                 <th>Designation</th>
@@ -34,6 +36,7 @@
             </thead>
             <tfoot>
               <tr>
+                <th>SL No</th>
                 <th>Teacher Name</th>
                 <th>Teacher ID</th>
                 <th>Designation</th>
@@ -45,6 +48,7 @@
               
               {% for i in teacherdata %}
               <tr>
+                <td>{{forloop.counter}}</td>
                 <td>{{i.TeacherName}}</td>
                 <td>{{i.EmployID}}</td>
                 <td>{{i.Designation}}</td>
