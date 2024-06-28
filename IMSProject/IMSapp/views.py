@@ -64,6 +64,7 @@ def courses(request):
 def batches(request):
     batchdata = BatchInfoModel.objects.all()
     current_path = request.path
+    print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
@@ -73,6 +74,44 @@ def batches(request):
     
     return render(request,'common/batches.html',context)
 
+def upcommingbatch(request):
+    batchdata = BatchInfoModel.objects.filter(Status='Upcomming')
+    current_path = request.path
+    print(current_path)
+    context = {
+        'pagetitle':'All Batches',
+        'subtitle':'Batches',
+        'batchdata':batchdata,
+        'path':current_path,
+    }
+    
+    return render(request,'common/upcommingbatch.html',context)
+
+def ongoingbatch(request):
+    batchdata = BatchInfoModel.objects.filter(Status='On-Going')
+    current_path = request.path
+    print(current_path)
+    context = {
+        'pagetitle':'All Batches',
+        'subtitle':'Batches',
+        'batchdata':batchdata,
+        'path':current_path,
+    }
+    
+    return render(request,'common/ongoingbatch.html',context)
+
+def completedbatch(request):
+    batchdata = BatchInfoModel.objects.filter(Status='Completed')
+    current_path = request.path
+    print(current_path)
+    context = {
+        'pagetitle':'All Batches',
+        'subtitle':'Batches',
+        'batchdata':batchdata,
+        'path':current_path,
+    }
+    
+    return render(request,'common/completedbatch.html',context)
 
 def contactpage(request):
     current_path = request.path

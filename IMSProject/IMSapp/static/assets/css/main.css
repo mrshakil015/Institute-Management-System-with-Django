@@ -1015,6 +1015,7 @@ section,
   align-items: center;
   text-align: center;
 }
+
 .batchfeatures .items {
   display: flex;
   justify-content: center; /* Center items horizontally */
@@ -1087,6 +1088,19 @@ section,
 .batchfeatures .nav-item:hover a {
   color: #127e80;
 }
+
+/* Active class styling */
+.batchfeatures .nav-item.active {
+  background-color: #fff;
+  border: 1px solid #127e80;
+}
+
+.batchfeatures .nav-item.active i,
+.batchfeatures .nav-item.active h3 {
+  color: #127e80; /* Ensure the text color remains readable */
+}
+
+
 
 
 

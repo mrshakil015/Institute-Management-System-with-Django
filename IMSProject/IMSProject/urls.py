@@ -20,6 +20,9 @@ urlpatterns = [
     
     path('courses/',courses,name="courses"),
     path('batches/',batches,name="batches"),
+    path('upcommingbatch/',upcommingbatch,name="upcommingbatch"),
+    path('ongoingbatch/',ongoingbatch,name="ongoingbatch"),
+    path('completedbatch/',completedbatch,name="completedbatch"),
     
     #----------Contact------------
     path('contactpage/',contactpage,name="contactpage"),
