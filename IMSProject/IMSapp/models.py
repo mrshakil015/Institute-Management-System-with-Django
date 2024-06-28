@@ -120,6 +120,7 @@ class AdmittedCourseModel(models.Model):
     Payment=models.CharField(max_length=150,null=True)
     Due=models.CharField(max_length=150,null=True)
     AdmissionDate=models.DateField(auto_now_add=True,null=True) 
+    CourseName = models.ForeignKey(CourseInfoModel,on_delete =models.SET_NULL, related_name="courseinfo",null=True)
 
 
 ## StaffModel

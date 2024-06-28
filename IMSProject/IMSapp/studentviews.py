@@ -132,6 +132,8 @@ def enrollcourse(request):
                 # Check if the student is already enrolled in the batch
                 batch_exists = AdmittedCourseModel.objects.filter(Courseuser=student, LearningBatch=batchno).exists()
                 if not batch_exists:
+                    batchdata = get_object_or_404(BatchInfoModel, BatchNo=batchno)
+                    courseenroll.CourseName = batchdata.CourseName
                     courseenroll.Courseuser = student
                     coursefee = courseenroll.CourseFee
                     pay = courseenroll.Payment
@@ -173,6 +175,8 @@ def editenrollcourse(request, myid):
                 if batchno != batch:
                     batch_exists = AdmittedCourseModel.objects.filter(Courseuser=student, LearningBatch=batchno).exists()
                     if not batch_exists:
+                        batchdata = get_object_or_404(BatchInfoModel, BatchNo=batchno)
+                        courseenroll.CourseName = batchdata.CourseName
                         courseenroll.Courseuser = student
                         coursefee = courseenroll.CourseFee
                         pay = courseenroll.Payment

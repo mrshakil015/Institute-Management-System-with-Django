@@ -12,20 +12,35 @@ def homepage(request):
     batchdata = BatchInfoModel.objects.all()
     teacherdata = TeacherModel.objects.all()
     
+    
     coursecount = coursedata.count()
     studentcount = studentdata.count()
     teachercount = teacherdata.count()
+    batchcount = batchdata.count()
     
     current_path = request.path
+    
+    #------No of Student in a Course
+    coursestudent = []
+    for course in coursedata:
+        nostudent = AdmittedCourseModel.objects.filter(CourseName=course).count()
+        coursestudent.append({
+            'course':course,
+            'student':nostudent,
+        })
+        
+    print(coursestudent)
     
     context = {
         'teacherdata':teacherdata,
         'teachercount':teachercount,
+        'coursestudent':coursestudent,
         'coursedata':coursedata,
         'categorydata':categorydata,
         'coursecount':coursecount,
         'batchdata':batchdata,
         'studentcount':studentcount,
+        'batchcount':batchcount,
         'path':current_path,
     }
     return render(request,'common/homepage.html',context)
