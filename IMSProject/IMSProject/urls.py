@@ -40,7 +40,8 @@ urlpatterns = [
 
     #------------Student----------------
     path('addstudent/',addstudent,name="addstudent"),
-    path('editstudent/',editstudent,name="editstudent"),
+    path('editstudent/<str:myid>',editstudent,name="editstudent"),
+    path('deletestudent/<str:myid>',deletestudent,name="deletestudent"),
     path('studentList/',studentlist,name="studentList"),
     path('viewstudent/',viewstudent,name="viewstudent"),
     
@@ -64,6 +65,7 @@ urlpatterns = [
     path('editstaff/',editstaff,name="editstaff"),
     path('stafflist/',stafflist,name="stafflist"),
     path('viewstaff/',viewstaff,name="viewstaff"),
+    
 
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

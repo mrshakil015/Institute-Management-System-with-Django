@@ -35,7 +35,7 @@ class StaffModel_Display(admin.ModelAdmin):
 admin.site.register(StaffModel,StaffModel_Display)
 
 class AdmittedCourseModel_Display(admin.ModelAdmin):
-    list_display=['Courseuser','CourseName']
+    list_display=['StudentID','LearningBatch']
 admin.site.register(AdmittedCourseModel,AdmittedCourseModel_Display)
 
 ##Salary Model
