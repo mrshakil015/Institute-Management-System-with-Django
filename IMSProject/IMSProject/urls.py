@@ -18,6 +18,9 @@ urlpatterns = [
     path('loginpage/',loginpage,name="loginpage"),
     path('logoutPage/',logoutPage,name="logoutPage"),
     
+    path('courses/',courses,name="courses"),
+    path('batches/',batches,name="batches"),
+    
     #----------Contact------------
     path('contactpage/',contactpage,name="contactpage"),
     path('addcontact/',addcontact,name="addcontact"),
@@ -71,6 +74,7 @@ urlpatterns = [
     path('enrollcourselist/',enrollcourselist,name="enrollcourselist"),
     path('editenrollcourse/<str:myid>',editenrollcourse,name="editenrollcourse"),
     path('deleteenrollcourse/<str:myid>',deleteenrollcourse,name="deleteenrollcourse"),
+    
     
 
 

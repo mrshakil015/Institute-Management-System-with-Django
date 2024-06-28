@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from IMSapp.models import *
+from django.urls import resolve
 
 # Create your views here.
 
@@ -13,12 +14,16 @@ def homepage(request):
     
     coursecount = coursedata.count()
     studentcount = studentdata.count()
+    
+    current_path = request.path
+    
     context = {
         'coursedata':coursedata,
         'categorydata':categorydata,
         'coursecount':coursecount,
         'batchdata':batchdata,
         'studentcount':studentcount,
+        'path':current_path,
     }
     return render(request,'common/homepage.html',context)
 
@@ -45,3 +50,35 @@ def logoutPage(request):
     logout(request)
     return redirect('homepage')
 
+
+def courses(request):
+    coursedata = CourseInfoModel.objects.all()
+    context = {
+        'pagetitle':'All Courses',
+        'subtitle':'Courses',
+        'coursedata':coursedata,
+    }
+    
+    return render(request,'common/courses.html',context)
+
+def batches(request):
+    batchdata = BatchInfoModel.objects.all()
+    current_path = request.path
+    context = {
+        'pagetitle':'All Batches',
+        'subtitle':'Batches',
+        'batchdata':batchdata,
+        'path':current_path,
+    }
+    
+    return render(request,'common/batches.html',context)
+
+
+def contactpage(request):
+    current_path = request.path
+    context = {
+        'pagetitle':'Contact US',
+        'subtitle':'Contact',
+        'path':current_path,
+    }
+    return render(request,'contact/contact.html',context)

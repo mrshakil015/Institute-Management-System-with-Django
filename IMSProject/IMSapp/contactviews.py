@@ -2,13 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from IMSapp.forms import *
 from IMSapp.models import WebsiteContactModel
 
-def contactpage(request):
-    
-    context = {
-        'pagetitle':'Contact US'
-    }
-    return render(request,'contact/contact.html',context)
-
 #------------Admin Contact----------
 def addcontact(request):
     if request.method == 'POST':
