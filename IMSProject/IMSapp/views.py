@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from IMSapp.models import *
-from django.urls import resolve
 
 # Create your views here.
 
@@ -11,13 +10,17 @@ def homepage(request):
     categorydata = CourseCategoryModel.objects.all()
     studentdata = StudentModel.objects.all()
     batchdata = BatchInfoModel.objects.all()
+    teacherdata = TeacherModel.objects.all()
     
     coursecount = coursedata.count()
     studentcount = studentdata.count()
+    teachercount = teacherdata.count()
     
     current_path = request.path
     
     context = {
+        'teacherdata':teacherdata,
+        'teachercount':teachercount,
         'coursedata':coursedata,
         'categorydata':categorydata,
         'coursecount':coursecount,
@@ -50,13 +53,26 @@ def logoutPage(request):
     logout(request)
     return redirect('homepage')
 
+def teachers(request):
+    teacherdata = TeacherModel.objects.all()
+    current_path = request.path
+    context = {
+        'pagetitle':'Meet with Our Makers',
+        'subtitle':'Trainers',
+        'teacherdata':teacherdata,
+        'path':current_path,
+    }
+    return render(request,'common/teachers.html',context)
+
 
 def courses(request):
     coursedata = CourseInfoModel.objects.all()
+    current_path = request.path
     context = {
         'pagetitle':'All Courses',
         'subtitle':'Courses',
         'coursedata':coursedata,
+        'path':current_path,
     }
     
     return render(request,'common/courses.html',context)

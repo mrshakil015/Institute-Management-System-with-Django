@@ -3,6 +3,7 @@ from IMSapp.forms import *
 from IMSapp.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import os
 
 @login_required
 def addteacher(request):
@@ -45,15 +46,20 @@ def addteacher(request):
 def editteacher(request, teacherid):
     teacherdata = get_object_or_404(TeacherModel, id=teacherid)
     personaldata = get_object_or_404(PersonalInfoModel, Imsuser=teacherdata.Imsuser)
+    img = teacherdata.TeacherPhoto
     
     if request.method == 'POST':
         teacherform = TeacherForm(request.POST, request.FILES, instance=teacherdata)
         personalform = PersonalInfoForm(request.POST, instance=personaldata)
-        
         if teacherform.is_valid() and personalform.is_valid():
             # Ensure the EmployID is not changed
+            teacher = teacherform.save(commit=False)
             teacherform.instance.EmployID = teacherdata.EmployID
-            teacherform.save()
+            
+            image = teacher.TeacherPhoto
+            if image != img:
+                os.remove(img.path)
+            teacher.save()
             personalform.save()
             messages.success(request, 'Successfully Updated')
             return redirect('teacherlist')

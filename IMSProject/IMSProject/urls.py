@@ -18,6 +18,7 @@ urlpatterns = [
     path('loginpage/',loginpage,name="loginpage"),
     path('logoutPage/',logoutPage,name="logoutPage"),
     
+    path('teachers/',teachers,name="teachers"),
     path('courses/',courses,name="courses"),
     path('batches/',batches,name="batches"),
     path('upcommingbatch/',upcommingbatch,name="upcommingbatch"),
