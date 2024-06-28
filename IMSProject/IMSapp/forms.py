@@ -34,15 +34,24 @@ class CourseInfoForm(forms.ModelForm):
             "CourseImage":"Course Image",
         }
  
+class EnrollCourseForm(forms.ModelForm):
+    class Meta:
+        model = AdmittedCourseModel
+        fields = "__all__"  
+        exclude = ['Courseuser','AdmissionDate','Due']
+        
+        labels = {
+            "LearningBatch":"Batch No",
+            "CourseFee":"Course Fee",
+        }    
 class AdmittedCourseForm(forms.ModelForm):
     class Meta:
         model = AdmittedCourseModel
         fields = "__all__"  
-        exclude = ['Courseuser','CourseName','LearningBatch','AssignTeacher','AdmissionDate','Due']
+        exclude = ['StudentID','AdmissionDate','Due']
         
         labels = {
             "LearningBatch":"Batch No",
-            "CourseName":"Course Name",
             "CourseFee":"Course Fee",
         }    
 
@@ -50,7 +59,7 @@ class PersonalInfoForm(forms.ModelForm):
     class Meta:
         model = PersonalInfoModel
         fields = "__all__"
-        exclude = ['Imsuser']
+        exclude = ['Imsuser','Password']
         
         widgets = {
             'DOB':forms.DateInput(attrs={
@@ -71,7 +80,7 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = StudentModel
         fields = "__all__"
-        exclude = ['Imsuser','StudentPhoto','AdmissionDate','LinkedInLink','GithubLink','FacebookLink']
+        exclude = ['Imsuser','AdmissionDate','LinkedInLink','GithubLink','FacebookLink']
         
         widgets = {
             'AdmissionDate':forms.DateInput(attrs={

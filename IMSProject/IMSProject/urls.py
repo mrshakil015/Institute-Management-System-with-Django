@@ -66,6 +66,12 @@ urlpatterns = [
     path('stafflist/',stafflist,name="stafflist"),
     path('viewstaff/',viewstaff,name="viewstaff"),
     
+        #---------Enroll Course List----------
+    path('enrollcourse/',enrollcourse,name="enrollcourse"),
+    path('enrollcourselist/',enrollcourselist,name="enrollcourselist"),
+    path('editenrollcourse/<str:myid>',editenrollcourse,name="editenrollcourse"),
+    path('deleteenrollcourse/<str:myid>',deleteenrollcourse,name="deleteenrollcourse"),
+    
 
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
