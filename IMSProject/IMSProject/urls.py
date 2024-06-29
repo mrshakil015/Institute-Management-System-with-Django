@@ -90,7 +90,9 @@ urlpatterns = [
     path('editenrollcourse/<str:myid>',editenrollcourse,name="editenrollcourse"),
     path('deleteenrollcourse/<str:myid>',deleteenrollcourse,name="deleteenrollcourse"),
     
+    ###Reviews
     
+    path('reviewlist/',reviewlist,name="reviewlist"),
 
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

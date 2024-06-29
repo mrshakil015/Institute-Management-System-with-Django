@@ -256,3 +256,10 @@ def contactpage(request):
         'path':current_path,
     }
     return render(request,'contact/contact.html',context)
+
+def reviewlist(request):
+    reviewdata = ReviewModel.objects.all()
+    context={
+        'reviewdata':reviewdata        
+    }
+    return render(request,'common/reviewlist.html',context)
