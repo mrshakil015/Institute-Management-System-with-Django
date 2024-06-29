@@ -47,7 +47,7 @@ admin.site.register(WebsiteContactModel)
 
 ##Review Model
 class ReviewModel_Display(admin.ModelAdmin):
-    list_display=['CourseName','ReviewDate']
+    list_display=['Imsuser']
 admin.site.register(ReviewModel,ReviewModel_Display)
 
 

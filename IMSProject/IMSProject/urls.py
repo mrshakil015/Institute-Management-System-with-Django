@@ -25,6 +25,7 @@ urlpatterns = [
     path('ongoingbatch/',ongoingbatch,name="ongoingbatch"),
     path('completedbatch/',completedbatch,name="completedbatch"),
     path('coursedetails/<str:myid>',coursedetails,name="coursedetails"),
+    path('coursereview/',coursereview,name="coursereview"),
     
     #----------Contact------------
     path('contactpage/',contactpage,name="contactpage"),
