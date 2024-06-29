@@ -1369,7 +1369,11 @@ section,
   border: 8px solid #fff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.137);
   cursor: pointer;
+  width: 100%; /* Ensures the image takes up the full width of the parent */
+  object-fit: cover; /* Ensures the image covers the entire div while maintaining aspect ratio */
+  height: 100%; /* Ensures the image height adjusts to fit the parent div */
 }
+
 
 
 .about-us .card {
@@ -1384,6 +1388,24 @@ section,
   margin: 0;
   font-weight: 900;
   color: #127e80;
+}
+.about-us .coursefee {
+  background-color: #df1529;
+  border: 8px solid #fff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.137);
+  border-radius: 30px;
+}
+.about-us .coursefee .card-title {
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: 900;
+  color: #ffffff;
+}
+.about-us .coursefee .card-text {
+  font-size: 2.3rem;
+  margin: 0;
+  font-weight: 900;
+  color: #ffffff;
 }
 
 .about-us .card-title {

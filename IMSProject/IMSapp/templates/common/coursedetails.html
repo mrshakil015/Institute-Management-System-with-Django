@@ -4,96 +4,124 @@
 
 <section id="about-us" class="section about-us">
     <div class="container">
-      <div class="row gy-4">
-        <div class="col-lg-6 order-1 order-lg-2 position-relative" data-aos="fade-up" data-aos-delay="100">
-          <img src="{{coursedata.CourseImage.url}}" class="img-fluid" alt="" data-bs-toggle="modal" data-bs-target="#videoModal">
-          <div class="play-icon" data-bs-toggle="modal" data-bs-target="#videoModal">
-            <i class="bi bi-play-circle"></i>
-          </div>
+        <div class="row gy-4">
+            <div class="col-lg-6 order-1 order-lg-2 position-relative" data-aos="fade-up" data-aos-delay="100">
+                <div>
+                    <img src="{{coursedata.CourseImage.url}}" class="img-fluid course-image" alt=""
+                        data-bs-toggle="modal" data-bs-target="#videoModal">
+                    <div class="play-icon" data-bs-toggle="modal" data-bs-target="#videoModal">
+                        <i class="bi bi-play-circle"></i>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card coursefee">
+                            <div class="card-body">
+                                <p class="card-title">Course Fee</p>
+                                <h5 class="card-text mb-3">BDT {{coursedata.CourseFee}}</h5>
+
+                                <a href="{{apply_url}}" class="btn btn-light btn-block text-black">
+                                    <i class="bi bi-send-fill"></i> Apply For Course
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body position-relative">
+                            <button type="button" class="btn-close position-absolute top-0 end-0 m-3"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="ratio ratio-16x9">
+                                <iframe id="videoIframe" src="" title="Course Video" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var videoModal = document.getElementById('videoModal');
+                    var videoIframe = document.getElementById('videoIframe');
+                    var videoUrl = "{{ coursedata.IntroVideo }}";
+
+                    // Replace the watch?v= part of the URL with embed/ if it's a YouTube link
+                    if (videoUrl.includes("watch?v=")) {
+                        videoUrl = videoUrl.replace("watch?v=", "embed/");
+                    }
+
+                    videoModal.addEventListener('show.bs.modal', function () {
+                        videoIframe.src = videoUrl;
+                    });
+
+                    videoModal.addEventListener('hidden.bs.modal', function () {
+                        videoIframe.src = "";
+                    });
+                });
+            </script>
+
+            <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                <p class="">{{coursedata.Sologan}}</p>
+                <h3>{{coursedata.CourseName}}</h3>
+
+                <!-- Add the cards here -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Lecture</p>
+                                <h5 class="card-text">{{coursedata.Lecture}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Project</p>
+                                <h5 class="card-text">{{coursedata.TotalProject}}+</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Duration</p>
+                                <h5 class="card-text">{{coursedata.CourseDuration}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>{{coursedata.ShortSummary}}</p>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{apply_url}}" class="btn btn-primary btn-block">
+                            <i class="bi bi-send-fill"></i> Apply For Course
+                        </a>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Course Overview</h3>
+                        <p>{{coursedata.CourseOverview}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-  
-        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-body position-relative">
-                <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="ratio ratio-16x9">
-                  <iframe id="videoIframe" src="" title="Course Video" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var videoModal = document.getElementById('videoModal');
-            var videoIframe = document.getElementById('videoIframe');
-            var videoUrl = "{{ coursedata.IntroVideo }}";
-  
-            // Replace the watch?v= part of the URL with embed/ if it's a YouTube link
-            if (videoUrl.includes("watch?v=")) {
-                videoUrl = videoUrl.replace("watch?v=", "embed/");
-            }
-  
-            videoModal.addEventListener('show.bs.modal', function () {
-                videoIframe.src = videoUrl;
-            });
-  
-            videoModal.addEventListener('hidden.bs.modal', function () {
-                videoIframe.src = "";
-            });
-        });
-        </script>
-  
-        <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
-          <p class="">{{coursedata.Sologan}}</p>
-          <h3>{{coursedata.CourseName}}</h3>
-  
-          <!-- Add the cards here -->
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Lecture</p>
-                  <h5 class="card-text">{{coursedata.Lecture}}</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Project</p>
-                  <h5 class="card-text">{{coursedata.TotalProject}}+</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title">Duration</p>
-                  <h5 class="card-text">{{coursedata.CourseDuration}}</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <p>{{coursedata.ShortSummary}}</p>
-  
-          <div class="row">
-            <div class="col-md-12">
-              <a href="{{apply_url}}" class="btn btn-primary btn-block">
-                <i class="bi bi-send-fill"></i> Apply For Course
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+
+       
     </div>
-  </section>
-  
+</section>
+
 
 
 {% endblock content %}
