@@ -44,10 +44,16 @@ class SalaryModel_Display(admin.ModelAdmin):
 admin.site.register(SalaryModel,SalaryModel_Display)
 
 admin.site.register(WebsiteContactModel)
-        
 
-                    
-                    
+##Review Model
+class ReviewModel_Display(admin.ModelAdmin):
+    list_display=['CourseName','ReviewDate']
+admin.site.register(ReviewModel,ReviewModel_Display)
+
+
+
+
+
 
 
 

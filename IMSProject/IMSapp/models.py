@@ -139,3 +139,11 @@ class SalaryModel(models.Model):
     Name=models.CharField(max_length=150,null=True)
     Salary=models.CharField(max_length=150,null=True)
     PaymentDate=models.DateField(null=True)
+
+
+## Review 
+class ReviewModel(models.Model):
+    Imsuser=models.ForeignKey(IMSUserModel, on_delete=models.CASCADE,related_name='reviewinfo',null=True)
+    Review=models.TextField(null=True)
+    CourseName= models.CharField(max_length=100,null=True)
+    ReviewDate=models.DateField(null=True)
