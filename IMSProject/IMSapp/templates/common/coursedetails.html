@@ -384,13 +384,22 @@
                 <form action="{% url 'coursereview' %}" method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <input type="hidden" name="courseid" value="{{coursedata.id}}">
+                        <label for="courseNameSelect" class="form-label">Select Course Name</label>
+                        <select class="form-control" id="courseNameSelect" name="courseName">
+                            {% for course in all_courses %}
+                                <option value="{{ course.id }}">{{ course.CourseName }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" name="courseid" value="{{ coursedata.id }}">
                         <textarea class="form-control" name="reviewtext" id="feedbackTextarea" rows="5" placeholder="Enter your feedback here"></textarea>
                     </div>
+                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-                
             </div><!-- End Contact Form -->
+            
 
         </div>
 

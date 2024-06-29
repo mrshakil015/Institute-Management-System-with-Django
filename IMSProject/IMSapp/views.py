@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from IMSapp.models import *
+
 from django.contrib import messages
 
 # Create your views here.
@@ -146,7 +147,7 @@ def coursedetails(request, myid):
     coursedata = get_object_or_404(CourseInfoModel, id=myid)
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     studentcount = AdmittedCourseModel.objects.filter(CourseName = coursedata).count()
-    
+    all_courses = CourseInfoModel.objects.all()
     
     context = {
         'pagetitle':coursedata,
@@ -154,21 +155,27 @@ def coursedetails(request, myid):
         'coursedata':coursedata,
         'contactdata':contactdata,
         'studentcount':studentcount,
+        'all_courses': all_courses,
     }
     
     return render(request,'common/coursedetails.html',context)
+
 
 def coursereview(request):
     if request.method == 'POST':
         courseid = request.POST.get('courseid')
         reviewtext = request.POST.get('reviewtext')
+        courseName = request.POST.get('courseName')
         current_user = request.user
-        
+
         admittedcoursedata = AdmittedCourseModel.objects.filter(Courseuser=current_user).exists()
+        courseinfo = get_object_or_404(CourseInfoModel, id=courseName)
         userdata = get_object_or_404(StudentModel, Imsuser=current_user)
+        
         if admittedcoursedata:
             reviewdata = ReviewModel(
-                Imsuser=userdata,  # Assuming current_user is IMSUserModel instance
+                Imsuser=userdata, 
+                CourseName=courseinfo,
                 Review=reviewtext,
             )
             reviewdata.save()
@@ -176,7 +183,7 @@ def coursereview(request):
             return redirect('coursedetails', myid=courseid)
         else:
             messages.warning(request, 'You are not admitted to this course.')
-    
+
     return redirect('courses')  # Redirect to courses or any appropriate view
 
 def batches(request):

@@ -148,7 +148,6 @@ class SalaryModel(models.Model):
 class ReviewModel(models.Model):
     Imsuser=models.ForeignKey(StudentModel, on_delete=models.SET_NULL,related_name='reviewinfo',null=True)
     Review=models.TextField(null=True)
-    # CourseName= models.ForeignKey(AdmittedCourseModel,on_delete =models.SET_NULL, related_name="reviewcourseinfo",null=True)
-    # BatchNo= models.ForeignKey(BatchInfoModel,on_delete=models.SET_NULL, related_name="reviewbatchinfo",null=True)
+    CourseName= models.ForeignKey(CourseInfoModel,on_delete =models.SET_NULL, related_name="reviewcourseinfo",null=True)
     ReviewDate=models.DateField(auto_now_add=True,null=True)
     Status = models.CharField(max_length=50, default='Pending',null=True)
