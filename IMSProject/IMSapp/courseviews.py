@@ -73,7 +73,6 @@ def editcourse(request,myid):
         if courseform.is_valid():
             course = courseform.save(commit=False)
             image = course.CourseImage
-            print("Image is: ",image)
             if image != img:
                 os.remove(img.path)
             course.save()

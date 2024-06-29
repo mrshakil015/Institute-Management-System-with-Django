@@ -91,7 +91,6 @@ def loginpage(request):
         password = request.POST.get('password')
         
         user = authenticate(username=username,password=password)
-        print("user is: ",user)
         if user:
             login(request,user)
             return redirect('dashboard')
@@ -146,7 +145,6 @@ def batches(request):
     batchdata = BatchInfoModel.objects.all()
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
-    print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
@@ -162,7 +160,6 @@ def upcommingbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='Upcomming')
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
-    print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
@@ -178,7 +175,6 @@ def ongoingbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='On-Going')
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
-    print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',
@@ -194,7 +190,6 @@ def completedbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='Completed')
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     current_path = request.path
-    print(current_path)
     context = {
         'pagetitle':'All Batches',
         'subtitle':'Batches',

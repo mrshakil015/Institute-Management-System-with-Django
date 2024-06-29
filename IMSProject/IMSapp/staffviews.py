@@ -3,9 +3,18 @@ from IMSapp.forms import *
 from IMSapp.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import secrets
+import string
+import os
+
+def generate_random_password(length=8):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(secrets.choice(characters) for i in range(length))
+    return password
 
 @login_required
 def addstaff(request):
+    password = generate_random_password()
     if request.method == 'POST':
         staffform = StaffForm(request.POST, request.FILES)
         personalform = PersonalInfoForm(request.POST)
@@ -13,7 +22,6 @@ def addstaff(request):
         if staffform.is_valid():
             staff = staffform.save(commit=False)
             EmployID = staff.EmployID
-            password = EmployID
             userrtype = 'Staff'
             
             staff_exists = IMSUserModel.objects.filter(username=EmployID).exists()
@@ -28,6 +36,7 @@ def addstaff(request):
                 if personalform.is_valid():
                     personalinfo = personalform.save(commit=False)
                     personalinfo.Imsuser = staffuser
+                    personalinfo.Password =password
                     personalinfo.save()
                     messages.success(request,'Successfully Added')
                     return redirect('stafflist')

@@ -3,17 +3,24 @@ from IMSapp.forms import *
 from IMSapp.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import secrets
+import string
 import os
+
+def generate_random_password(length=8):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(secrets.choice(characters) for i in range(length))
+    return password
 
 @login_required
 def addteacher(request):
+    password = generate_random_password()
     if request.method == 'POST':
         teacherform = TeacherForm(request.POST,request.FILES)
         personalform = PersonalInfoForm(request.POST)
         if teacherform.is_valid():
             teacher = teacherform.save(commit = False)
             teacherid = teacher.EmployID
-            password = teacherid
             usertype = 'Teacher'
             
             teacher_exists = IMSUserModel.objects.filter(username=teacherid).exists()
@@ -26,6 +33,7 @@ def addteacher(request):
                 if personalform.is_valid():
                     personalinfo = personalform.save(commit = False)
                     personalinfo.Imsuser = teacheruser
+                    personalinfo.Password =password
                     personalinfo.save()
                     messages.success(request,'Successfully Added')
                     return redirect('teacherlist')
