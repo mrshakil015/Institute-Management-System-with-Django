@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from IMSapp.models import *
@@ -140,6 +140,19 @@ def courses(request):
     }
     
     return render(request,'common/courses.html',context)
+
+def coursedetails(request, myid):
+    coursedata = get_object_or_404(CourseInfoModel, id=myid)
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    
+    context = {
+        'pagetitle':coursedata,
+        'subtitle':'Course',
+        'coursedata':coursedata,
+        'contactdata':contactdata,
+    }
+    
+    return render(request,'common/coursedetails.html',context)
 
 def batches(request):
     batchdata = BatchInfoModel.objects.all()
