@@ -18,8 +18,17 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
+  
+      {% if not user.is_authenticated %}
       <a class="btn-getstarted" href="{% url 'loginpage' %}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+
+      {% else %}
+      <a class="btn-getstarted" href="{% url 'dashboard' %}"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+      <a class="btn-getstarted" href="{% url 'logoutPage' %}"><i class="bi bi-box-arrow-left"></i> Logout</a>
+
+        
+      {% endif %}
+        
 
     </div>
   </header>
