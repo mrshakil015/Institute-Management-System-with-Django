@@ -28,7 +28,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-12">
-                        <div class="card coursefee">
+                        <div class="card coursestudent">
                             <div class="card-body">
                                 <p class="card-title">Enrolled Students</p>
                                 <h5 class="card-text mb-3"><i class="bi bi-people-fill"></i> {{studentcount}}+</h5>
@@ -81,7 +81,7 @@
                 <p class="">{{coursedata.Sologan}}</p>
                 <h3>{{coursedata.CourseName}}</h3>
 
-                <div class="row">
+                <div class="row topsection-card">
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
@@ -180,7 +180,7 @@
 
                             items.forEach((item, index) => {
                                 const bulletItem = document.createElement('div');
-                                bulletItem.innerHTML = `<i class="bi bi-check-square"></i> ${item.trim()}`;
+                                bulletItem.innerHTML = `<i class="bi bi-clipboard-check-fill"></i> ${item.trim()}`;
 
                                 if (index % 2 === 0) {
                                     column1.appendChild(bulletItem);

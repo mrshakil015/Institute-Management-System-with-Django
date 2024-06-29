@@ -201,6 +201,27 @@ def batches(request):
     
     return render(request,'common/batches.html',context)
 
+def batchdetails(request, myid):
+    batchdata = get_object_or_404(BatchInfoModel, id = myid)
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    studentcount = AdmittedCourseModel.objects.filter(LearningBatch=batchdata).count()
+    totalstudent = batchdata.TotalStudent
+    remainstudent = int(totalstudent) - int(studentcount)
+    current_path = request.path
+    
+    context = {
+        'batchdata':batchdata,
+        'pagetitle':'Batch Details',
+        'subtitle':'Batches',
+        'headtitle': 'Batch Details',
+        'contactdata':contactdata,
+        'studentcount':studentcount,
+        'remainstudent':remainstudent,
+        'path':current_path,
+    }
+    
+    return render(request, 'common/batchdetails.html',context)
+
 def upcommingbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='Upcomming')
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
