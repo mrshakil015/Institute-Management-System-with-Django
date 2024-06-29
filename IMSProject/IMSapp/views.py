@@ -144,12 +144,15 @@ def courses(request):
 def coursedetails(request, myid):
     coursedata = get_object_or_404(CourseInfoModel, id=myid)
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    studentcount = AdmittedCourseModel.objects.filter(CourseName = coursedata).count()
+    
     
     context = {
         'pagetitle':coursedata,
         'subtitle':'Course',
         'coursedata':coursedata,
         'contactdata':contactdata,
+        'studentcount':studentcount,
     }
     
     return render(request,'common/coursedetails.html',context)

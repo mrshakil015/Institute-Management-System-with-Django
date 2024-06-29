@@ -18,9 +18,20 @@
                             <div class="card-body">
                                 <p class="card-title">Course Fee</p>
                                 <h5 class="card-text mb-3">BDT {{coursedata.CourseFee}}</h5>
-                                <a href="{% url 'upcommingbatch' %}" class="btn btn-light btn-block text-black">
+                                <a href="{% url 'upcommingbatch' %}" class="btn btn-light btn-block text-danger">
                                     <i class="bi bi-send-fill"></i> Apply For Batch
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <div class="card coursefee">
+                            <div class="card-body">
+                                <p class="card-title">Enrolled Students</p>
+                                <h5 class="card-text mb-3"><i class="bi bi-people-fill"></i> {{studentcount}}+</h5>
+                                
                             </div>
                         </div>
                     </div>
