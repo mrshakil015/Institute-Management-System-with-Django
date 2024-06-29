@@ -22,9 +22,7 @@
     <!-- End Logo Header -->
   </div>
   <div class="sidebar-wrapper scrollbar scrollbar-inner">
-    <div class="sidebar-content">
-      
-      {% if user.UserType == 'Authority' %}
+    <div class="sidebar-content">     
       <ul class="nav nav-secondary">
         <li class="nav-item">
           <a href="{% url 'dashboard' %}">
@@ -32,6 +30,11 @@
             <p>Dashboard</p>
           </a>
         </li>
+      </ul>
+
+      
+      {% if user.UserType == 'Authority' %}
+      <ul class="nav nav-secondary">
         <li class="nav-item">
           <a href="{% url 'studentList' %}">
             <i class="fas fa-user-graduate"></i>
@@ -109,10 +112,39 @@
             <p>Contact Info</p>
           </a>
         </li>
-       
+      
       </ul>
-        
+      {% elif user.UserType == 'Teacher' %}
+      <ul class="nav nav-secondary">
+        <li class="nav-item">
+          <a href="">
+            <i class="fas fa-address-book"></i>
+            <p>Personal Information</p>
+          </a>
+        </li> 
+              <li class="nav-item">
+          <a href="">
+            <i class="fas fa-address-book"></i>
+            <p>Batches</p>
+          </a>
+        </li>  
+        </li> 
+              <li class="nav-item">
+          <a href="">
+            <i class="fas fa-address-book"></i>
+            <p>Salary</p>
+          </a>
+        </li>  
+        </li> 
+              <li class="nav-item">
+          <a href="">
+            <i class="fas fa-address-book"></i>
+            <p> Attendence</p>
+          </a>
+        </li>  
+      </ul>
       {% endif %}
+      
         
     </div>
   </div>
