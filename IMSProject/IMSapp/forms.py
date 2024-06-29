@@ -38,7 +38,7 @@ class EnrollCourseForm(forms.ModelForm):
     class Meta:
         model = AdmittedCourseModel
         fields = "__all__"  
-        exclude = ['Courseuser','CourseName','AdmissionDate','Due']
+        exclude = ['Courseuser','Studentuser','CourseName','AdmissionDate','Due']
         
         labels = {
             "LearningBatch":"Batch No",
