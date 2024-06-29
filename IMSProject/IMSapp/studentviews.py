@@ -219,7 +219,12 @@ def studentbatches(request):
     return render(request,'students/studentbatches.html')
 @login_required
 def studentInfo(request):
-    return render(request,'students/studentInfo.html')
+    current_user=request.user
+    studentinfo=get_object_or_404(StudentModel,Imsuser=current_user)
+    context={
+        'studentinfo':studentinfo,
+    }
+    return render(request,'students/studentInfo.html',context)
 @login_required
 def studentPayment(request):
     return render(request,'students/studentPayment.html')
