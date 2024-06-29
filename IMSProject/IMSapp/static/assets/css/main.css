@@ -1,7 +1,7 @@
 /* Fonts */
 :root {
   --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
+  --heading-font: "Anik-Bangla",  sans-serif;
   --nav-font: "Poppins",  sans-serif;
 }
 
@@ -1369,12 +1369,38 @@ section,
   border: 8px solid #fff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.137);
   cursor: pointer;
-  width: 100%; /* Ensures the image takes up the full width of the parent */
-  object-fit: cover; /* Ensures the image covers the entire div while maintaining aspect ratio */
-  height: 100%; /* Ensures the image height adjusts to fit the parent div */
+  width: 100%;
+  object-fit: cover;
 }
 
+.image-container {
+  position: relative;
+  height: 350px; /* Adjust the height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  border: 8px solid #fff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.137);
+}
+
+.play-icon {
+  position: absolute;
+  font-size: 3rem;
+  color: #127e80;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.play-icon:hover {
+  color: red;
+}
 
 .about-us .card {
   border: 1px solid #ddd;
@@ -1389,18 +1415,21 @@ section,
   font-weight: 900;
   color: #127e80;
 }
+
 .about-us .coursefee {
   background-color: #df1529;
   border: 8px solid #fff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.137);
   border-radius: 30px;
 }
+
 .about-us .coursefee .card-title {
   font-size: 1.3rem;
   margin: 0;
   font-weight: 900;
   color: #ffffff;
 }
+
 .about-us .coursefee .card-text {
   font-size: 2.3rem;
   margin: 0;
@@ -1438,21 +1467,18 @@ section,
   position: relative;
 }
 
-.play-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  color: #127e80;
-  cursor: pointer;
-  z-index: 1;
+#course-curriculum .col-md-6 {
+  display: inline-block;
+  vertical-align: top;
 }
 
-.play-icon:hover {
-  color: red;
+#course-curriculum .row {
+  display: flex;
 }
 
+#course-curriculum div {
+  margin-bottom: 10px;
+}
 
 /*--------------------------------------------------------------
 # Testimonials Section
