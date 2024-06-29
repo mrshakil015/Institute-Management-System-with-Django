@@ -104,7 +104,12 @@ def viewteacher(request):
 
 @login_required
 def teacherpersonalinfo(request):
-    return render(request,'teachers/teacherpersonalinfo.html') 
+    current_user=request.user
+    teacherinfo=get_object_or_404(TeacherModel,Imsuser=current_user)
+    context={
+        'teacherinfo':teacherinfo,
+    }
+    return render(request,'teachers/teacherpersonalinfo.html',context) 
 
 @login_required
 def teacherbatchinfo(request):
