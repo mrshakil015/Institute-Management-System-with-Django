@@ -59,6 +59,9 @@
                   <td>{{i.enrolledstudent}}/{{i.batchdata.TotalStudent}}</td>
                   <td>
                     <div class="form-button-action">
+                      <a href="{% url 'viewbatch' i.batchdata.BatchNo %}" class="btn btn-link btn-primary btn-md">
+                        <i class="fa fa-eye"></i>
+                      </a>
                       <a href="{% url 'editbatch' i.batchdata.id %}" class="btn btn-link btn-primary btn-md">
                         <i class="fa fa-edit"></i>
                       </a>

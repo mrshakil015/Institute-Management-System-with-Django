@@ -57,5 +57,23 @@ def deletebatch(request,myid):
     return redirect('batchlist')
 
 @login_required
-def viewbatch(request):
-    return render(request,"batches/viewbatch.html")     
+def viewbatch(request, myid):
+    batchdata = get_object_or_404(BatchInfoModel, BatchNo=myid)
+    enrolledstudent = AdmittedCourseModel.objects.filter(LearningBatch = batchdata)
+    totalstudent = enrolledstudent.count()
+    print("Enrolled data: ",enrolledstudent)
+    
+    # combined_data = []
+    # for data in enrolledstudent:
+    #     studentdata = IMSUserModel.objects.filter(username = data)
+    #     print("student: ",studentdata)
+        
+        
+    
+    context = {
+        'batchdata':batchdata,
+        'totalstudent':totalstudent,
+        'enrolledstudent':enrolledstudent,
+    }
+    
+    return render(request,"batches/viewbatch.html",context)     

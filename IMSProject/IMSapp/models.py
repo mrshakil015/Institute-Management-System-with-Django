@@ -67,6 +67,8 @@ class StudentModel(models.Model):
     LinkedInLink =models.CharField(max_length=150,null=True)
     GithubLink =models.CharField(max_length=150,null=True)
     FacebookLink =models.CharField(max_length=150,null=True)
+    def __str__(self):
+        return self.StudentID
     
 class BatchInfoModel(models.Model):
     BatchNo=models.CharField(max_length=100,null=True)
@@ -114,6 +116,7 @@ class WebsiteContactModel(models.Model):
 ## AdmittedCourseModel
 class AdmittedCourseModel(models.Model):
     Courseuser=models.ForeignKey(IMSUserModel,on_delete=models.CASCADE,related_name='admittedcourseinfo', null=True)
+    Studentuser =models.ForeignKey(StudentModel,on_delete=models.CASCADE,related_name='studetinfo', null=True)
     StudentID = models.CharField(max_length=150,null=True)
     LearningBatch=models.ForeignKey(BatchInfoModel,on_delete=models.SET_NULL, related_name="batchinfo",null=True)
     CourseFee=models.CharField(max_length=150,null=True)

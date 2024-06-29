@@ -73,7 +73,7 @@ urlpatterns = [
     path('batchlist/',batchlist,name="batchlist"),
     path('editbatch/<str:myid>',editbatch,name="editbatch"),
     path('deletebatch/<str:myid>',deletebatch,name="deletebatch"),
-    path('viewbatch/',viewbatch,name="viewbatch"),
+    path('viewbatch/<str:myid>',viewbatch,name="viewbatch"),
 
     #staff
     path('addstaff/',addstaff,name="addstaff"),
