@@ -101,3 +101,19 @@ def deleteteacher(request,teacherid):
 @login_required
 def viewteacher(request):
     return render(request,'teachers/viewteacher.html') 
+
+@login_required
+def teacherpersonalinfo(request):
+    return render(request,'teachers/teacherpersonalinfo.html') 
+
+@login_required
+def teacherbatchinfo(request):
+    return render(request,'teachers/teacherbatchinfo.html') 
+
+@login_required
+def teachersalaryinfo(request):
+    return render(request,'teachers/teachersalaryinfo.html') 
+
+@login_required
+def teacherattendence(request):
+    return render(request,'teachers/teacherattendence.html') 

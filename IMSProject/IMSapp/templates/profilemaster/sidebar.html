@@ -117,27 +117,27 @@
       {% elif user.UserType == 'Teacher' %}
       <ul class="nav nav-secondary">
         <li class="nav-item">
-          <a href="">
+          <a href="{% url 'teacherpersonalinfo' %}">
             <i class="fas fa-address-book"></i>
             <p>Personal Information</p>
           </a>
         </li> 
               <li class="nav-item">
-          <a href="">
+          <a href="{% url 'teacherbatchinfo' %}">
             <i class="fas fa-address-book"></i>
             <p>Batches</p>
           </a>
         </li>  
         </li> 
               <li class="nav-item">
-          <a href="">
+          <a href="{% url 'teachersalaryinfo' %}">
             <i class="fas fa-address-book"></i>
             <p>Salary</p>
           </a>
         </li>  
         </li> 
               <li class="nav-item">
-          <a href="">
+          <a href="{% url 'teacherattendence' %}">
             <i class="fas fa-address-book"></i>
             <p> Attendence</p>
           </a>
