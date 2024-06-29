@@ -51,6 +51,10 @@ urlpatterns = [
     path('deletestudent/<str:myid>',deletestudent,name="deletestudent"),
     path('studentList/',studentlist,name="studentList"),
     path('viewstudent/',viewstudent,name="viewstudent"),
+    path('studentAttendance/',studentAttendance,name="studentAttendance"),
+    path('studentbatches/',studentbatches,name="studentbatches"),
+    path('studentInfo/',studentInfo,name="studentInfo"),
+    path('studentPayment/',studentPayment,name="studentPayment"),
     
     ##Teacher
     path('addteacher/',addteacher,name="addteacher"),

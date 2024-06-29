@@ -211,3 +211,15 @@ def deleteenrollcourse(request,myid):
     messages.success(request,'Enrolled Student Deleted')
     
     return redirect('enrollcourselist')
+@login_required
+def studentAttendance(request):
+    return render(request,'students/studentAttendance.html')
+@login_required
+def studentbatches(request):
+    return render(request,'students/studentbatches.html')
+@login_required
+def studentInfo(request):
+    return render(request,'students/studentInfo.html')
+@login_required
+def studentPayment(request):
+    return render(request,'students/studentPayment.html')
