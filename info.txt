@@ -6,5 +6,13 @@ Authority
     username = ims121
     password = 1234  
 
+Student
+    username = 200121011
+    password = ]gp))?d;  
+Teacher
+    username = 10031
+    password = 7/i&A1\]  
+
+
 Authority Create using shell:
     IMSUserModel.objects.create_user(username='ims121',password='1234',UserType='Authority')

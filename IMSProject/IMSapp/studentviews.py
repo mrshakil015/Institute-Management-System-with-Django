@@ -340,14 +340,52 @@ def studentInfo(request):
 def studentbatches(request):
     current_user = request.user
     batchdata=AdmittedCourseModel.objects.filter(Courseuser=current_user)
+
+    spenttime = 0
+    lecture = 0
+    project = 0
+    for batch in batchdata:
+        course = get_object_or_404(CourseInfoModel,CourseName =batch.LearningBatch.CourseName)
+        spenttime += int(course.CourseDuration)
+        lecture += int(course.Lecture)
+        project += int(course.TotalProject)
+        
+    context = {
+        'batchdata':batchdata,
+        'spenttime':spenttime,
+        'lecture':lecture,
+        'project':project,
+    }
+    
+    return render(request,'students/studentbatches.html',context)
+@login_required
+def studentongoingbatch(request):
+    current_user = request.user
+    coursedata=AdmittedCourseModel.objects.filter(Courseuser=current_user)
+
+    for batch in coursedata:
+        batchdata = BatchInfoModel.objects.filter(Status = 'On-Going')
+
     context = {
         'batchdata':batchdata,
     }
     
-    return render(request,'students/studentbatches.html',context)
-
-
+    return render(request,'students/studentongoginbatch.html',context)
 
 @login_required
 def studentPayment(request):
-    return render(request,'students/studentPayment.html')
+    current_user = request.user
+    coursefee=0
+    payment=0
+    coursedata=AdmittedCourseModel.objects.filter(Courseuser=current_user)
+    for batch in coursedata:
+        coursefee += int(batch.CourseFee)
+        payment += int(batch.Payment)
+    due = int(coursefee) - int(payment)
+    context = {
+        'coursedata':coursedata,
+        'coursefee':coursefee,
+        'payment':payment,
+        'due':due,
+    }
+    return render(request,'students/studentPayment.html',context)
