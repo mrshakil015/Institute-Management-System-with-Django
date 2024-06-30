@@ -326,17 +326,28 @@ def deletependingstudent(request, myid):
 @login_required
 def studentAttendance(request):
     return render(request,'students/studentAttendance.html')
-@login_required
-def studentbatches(request):
-    return render(request,'students/studentbatches.html')
+
 @login_required
 def studentInfo(request):
     current_user=request.user
-    studentinfo=get_object_or_404(StudentModel,Imsuser=current_user)
+    studentdata=get_object_or_404(StudentModel,Imsuser=current_user)
     context={
-        'studentinfo':studentinfo,
+        'studentdata':studentdata,
     }
     return render(request,'students/studentInfo.html',context)
+
+@login_required
+def studentbatches(request):
+    current_user = request.user
+    batchdata=AdmittedCourseModel.objects.filter(Courseuser=current_user)
+    context = {
+        'batchdata':batchdata,
+    }
+    
+    return render(request,'students/studentbatches.html',context)
+
+
+
 @login_required
 def studentPayment(request):
     return render(request,'students/studentPayment.html')
