@@ -60,6 +60,10 @@ urlpatterns = [
     path('studentInfo/',studentInfo,name="studentInfo"),
     path('studentPayment/',studentPayment,name="studentPayment"),
     
+    path('pendingstudentlist/',pendingstudentlist,name="pendingstudentlist"),
+    path('editpendingstudent/<str:myid>',editpendingstudent,name="editpendingstudent"),
+    path('deletependingstudent/<str:myid>',deletependingstudent,name="deletependingstudent"),
+    
     ##Teacher
     path('addteacher/',addteacher,name="addteacher"),
     path('editteacher/<str:teacherid>',editteacher,name="editteacher"),

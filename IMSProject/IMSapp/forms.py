@@ -44,6 +44,16 @@ class EnrollCourseForm(forms.ModelForm):
             "LearningBatch":"Batch No",
             "CourseFee":"Course Fee",
         }    
+class PendingEnrollCourseForm(forms.ModelForm):
+    class Meta:
+        model = AdmittedCourseModel
+        fields = "__all__"  
+        exclude = ['StudentID','Courseuser','Studentuser','CourseName','AdmissionDate','Due']
+        
+        labels = {
+            "LearningBatch":"Batch No",
+            "CourseFee":"Course Fee",
+        }    
 class AdmittedCourseForm(forms.ModelForm):
     class Meta:
         model = AdmittedCourseModel
