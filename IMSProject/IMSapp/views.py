@@ -164,32 +164,6 @@ def coursedetails(request, myid):
     
     return render(request,'common/coursedetails.html',context)
 
-
-def coursereview(request):
-    if request.method == 'POST':
-        courseid = request.POST.get('courseid')
-        reviewtext = request.POST.get('reviewtext')
-        courseName = request.POST.get('courseName')
-        current_user = request.user
-
-        admittedcoursedata = AdmittedCourseModel.objects.filter(Courseuser=current_user).exists()
-        courseinfo = get_object_or_404(CourseInfoModel, id=courseName)
-        userdata = get_object_or_404(StudentModel, Imsuser=current_user)
-        
-        if admittedcoursedata:
-            reviewdata = ReviewModel(
-                Imsuser=userdata, 
-                CourseName=courseinfo,
-                Review=reviewtext,
-            )
-            reviewdata.save()
-            messages.success(request, 'Review Submitted Successfully.')
-            return redirect('coursedetails', myid=courseid)
-        else:
-            messages.warning(request, 'You are not admitted to this course.')
-
-    return redirect('courses')  # Redirect to courses or any appropriate view
-
 def batches(request):
     batchdata = BatchInfoModel.objects.all()
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
@@ -282,13 +256,6 @@ def contactpage(request):
     }
     return render(request,'contact/contact.html',context)
 
-def reviewlist(request):
-    reviewdata = ReviewModel.objects.all()
-    context={
-        'reviewdata':reviewdata        
-    }
-    return render(request,'common/reviewlist.html',context)
-
 def applybatch(request, myid):
     batchdata = get_object_or_404(BatchInfoModel, BatchNo=myid)
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
@@ -315,3 +282,50 @@ def applybatch(request, myid):
     
     return render(request, 'common/applybatch.html', context)
 
+#----------Review Section-------------
+def reviewlist(request):
+    reviewdata = ReviewModel.objects.all()
+    context={
+        'reviewdata':reviewdata        
+    }
+    return render(request,'common/reviewlist.html',context)
+
+def deletereview(request, myid):
+    reviewdata = get_object_or_404(ReviewModel, id=myid)
+    reviewdata.delete()
+    messages.success(request,'Successfully Deleted')    
+    return redirect('reviewlist')
+
+def approvereview(request,myid):
+    reviewdata = get_object_or_404(ReviewModel, id=myid)
+    if reviewdata.Status == 'Approved':
+        messages.warning(request,'Review already approved.') 
+    else:  
+        reviewdata.Status = 'Approved'
+        reviewdata.save()
+    return redirect('reviewlist')
+
+def coursereview(request):
+    if request.method == 'POST':
+        courseid = request.POST.get('courseid')
+        reviewtext = request.POST.get('reviewtext')
+        courseName = request.POST.get('courseName')
+        current_user = request.user
+
+        admittedcoursedata = AdmittedCourseModel.objects.filter(Courseuser=current_user).exists()
+        courseinfo = get_object_or_404(CourseInfoModel, id=courseName)
+        userdata = get_object_or_404(StudentModel, Imsuser=current_user)
+        
+        if admittedcoursedata:
+            reviewdata = ReviewModel(
+                Imsuser=userdata, 
+                CourseName=courseinfo,
+                Review=reviewtext,
+            )
+            reviewdata.save()
+            messages.success(request, 'Review Submitted Successfully.')
+            return redirect('coursedetails', myid=courseid)
+        else:
+            messages.warning(request, 'You are not admitted to this course.')
+
+    return redirect('courses')  # Redirect to courses or any appropriate view

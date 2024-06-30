@@ -318,7 +318,10 @@ def editpendingstudent(request, myid):
 
 @login_required
 def deletependingstudent(request, myid):
-    pass
+    studentdata = get_object_or_404(PendingStudentModel, id = myid)
+    studentdata.delete()
+    messages.success(request, 'Successfully Deleted')
+    return redirect('pendingstudentlist')
 
 @login_required
 def studentAttendance(request):

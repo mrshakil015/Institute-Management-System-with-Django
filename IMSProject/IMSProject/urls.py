@@ -96,9 +96,11 @@ urlpatterns = [
     path('editenrollcourse/<str:myid>',editenrollcourse,name="editenrollcourse"),
     path('deleteenrollcourse/<str:myid>',deleteenrollcourse,name="deleteenrollcourse"),
     
-    ###Reviews
-    
+    #-------------Reviews-----------
     path('reviewlist/',reviewlist,name="reviewlist"),
+    path('deletereview/<str:myid>',deletereview,name="deletereview"),
+    path('approvereview/<str:myid>',approvereview,name="approvereview"),
+    
 
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
