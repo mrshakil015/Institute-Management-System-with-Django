@@ -10,13 +10,13 @@
         <div class="row align-items-center">
           <div class="col-icon">
             <div class="icon-big text-center icon-primary bubble-shadow-small">
-              <i class="fas fa-users"></i>
+              <i class="fas fa-layer-group"></i>
             </div>
           </div>
           <div class="col col-stats ms-3 ms-sm-0">
             <div class="numbers">
-              <p class="card-category">Enrolled Students</p>
-              <h4 class="card-title">{{totalenrolledstudent}}</h4>
+              <p class="card-category">Enrolled Course</p>
+              <h4 class="card-title">{{studentcoursedata|length}}</h4>
             </div>
           </div>
         </div>
@@ -29,13 +29,13 @@
         <div class="row align-items-center">
           <div class="col-icon">
             <div class="icon-big text-center icon-info bubble-shadow-small">
-              <i class="fas fa-chalkboard-teacher"></i>
+              <i class="fas fa-credit-card"></i>
             </div>
           </div>
           <div class="col col-stats ms-3 ms-sm-0">
             <div class="numbers">
-              <p class="card-category">Teachers</p>
-              <h4 class="card-title">{{totalteacher}}</h4>
+              <p class="card-category">Course Fee</p>
+              <h4 class="card-title">৳ {{coursefee}}</h4>
             </div>
           </div>
         </div>
@@ -48,13 +48,13 @@
         <div class="row align-items-center">
           <div class="col-icon">
             <div class="icon-big text-center icon-success bubble-shadow-small">
-              <i class="fas fa-layer-group"></i>
+              <i class="fas fa-wallet"></i>
             </div>
           </div>
           <div class="col col-stats ms-3 ms-sm-0">
             <div class="numbers">
-              <p class="card-category">Batches</p>
-              <h4 class="card-title">{{totalbatch}}</h4>
+              <p class="card-category">Payment</p>
+              <h4 class="card-title">৳ {{payment}}</h4>
             </div>
           </div>
         </div>
@@ -62,26 +62,131 @@
     </div>
   </div>
   <div class="col-sm-6 col-md-3">
-    <div class="card card-stats card-round">
-      <div class="card-body">
-        <div class="row align-items-center">
-          <div class="col-icon">
-            <div class="icon-big text-center icon-secondary bubble-shadow-small">
-              <i class="fas fa-book"></i>
+      <div class="card card-stats card-round">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-icon">
+              <div class="icon-big text-center icon-danger bubble-shadow-small">
+                  <i class="fas fa-money-bill-wave"></i>
+              </div>
             </div>
-          </div>
-          <div class="col col-stats ms-3 ms-sm-0">
-            <div class="numbers">
-              <p class="card-category">Courses</p>
-              <h4 class="card-title">{{totalcourse}}</h4>
+            <div class="col col-stats ms-3 ms-sm-0">
+              <div class="numbers">
+                <p class="card-category">Due</p>
+                <h4 class="card-title">৳ {{due}}</h4>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
-  
+
+<div class="row">
+  <div class="col-sm-6 col-md-3">
+      <div class="card card-stats card-round">
+          <div class="card-body">
+              <div class="row align-items-center">
+                  <div class="col-icon">
+                      <div class="icon-big text-center icon-success bubble-shadow-small">
+                          <i class="fas fa-clock"></i>
+                      </div>
+                  </div>
+                  <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="numbers">
+                          <p class="card-category">Spent Time</p>
+                          <h4 class="card-title">{{spenttime}} Months</h4>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+      <div class="card card-stats card-round">
+          <div class="card-body">
+              <div class="row align-items-center">
+                  <div class="col-icon">
+                      <div class="icon-big text-center icon-danger bubble-shadow-small">
+                          <i class="fas fa-layer-group"></i>
+                      </div>
+                  </div>
+                  <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="numbers">
+                          <p class="card-category">Total Lecture</p>
+                          <h4 class="card-title">{{lecture}}+</h4>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+      <div class="card card-stats card-round">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-icon">
+              <div class="icon-big text-center icon-info bubble-shadow-small">
+                <i class="fas fa-luggage-cart"></i>
+              </div>
+            </div>
+            <div class="col col-stats ms-3 ms-sm-0">
+              <div class="numbers">
+                <p class="card-category">Total Project</p>
+                <h4 class="card-title">{{project}}+</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row justify-content-center align-items-center mb-5">
+  {% for i in studentcoursedata %}
+  <div class="col-md-6">
+      <a href="{% url 'batchdetails' i.LearningBatch.id %}">
+      <div class="card card-black bg-primary-gradient">
+          <div class="card-body curves-shadow">
+
+              <h2 class="py-4 mb-0"><strong>Batch No:</strong> {{i.LearningBatch}}</h2>
+              <div class="row">
+                  <div class="col-8 pe-0">
+                      <h3 class="fw-bold mb-1">{{i.LearningBatch.CourseName}}</h3>
+                      <div class="text-small text-uppercase fw-bold op-8">
+                          Batch Start: {{i.LearningBatch.BatchStartDate}}
+                      </div>
+                  </div>
+                  <div class="col-4 ps-0 text-end">
+                      <h3 class="fw-bold mb-1">{{i.LearningBatch.Status}} </h3>
+                      <div class="text-small text-uppercase fw-bold op-8">
+                          Status
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer">
+              <div class="row user-stats text-center">
+                  <div class="col">
+                      <h3 class="number fw-bold p-0 m-0">{{i.LearningBatch.CourseName.Lecture}}</h3>
+                      <div class="title">Lecture</div>
+                  </div>
+                  <div class="col">
+                      <h3 class="number fw-bold p-0 m-0">{{i.LearningBatch.CourseName.CourseDuration}} Months</h3>
+                      <div class="title">Duration</div>
+                  </div>
+                  <div class="col">
+                      <h5 class="number fw-bold p-0 m-0">{{i.LearningBatch.Batchschedule}}</h5>
+                      <div class="title">Weekly Class</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </a>
+  </div>
+
+  {% endfor %}
+</div>
 
 {% elif user.UserType == 'Authority' %}
 

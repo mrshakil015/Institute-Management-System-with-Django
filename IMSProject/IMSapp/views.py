@@ -76,6 +76,27 @@ def dashboard(request):
             'batchdata': data, 
             'enrolledstudent': enrolledstudent,
         })
+        
+    #------------Student----------
+    current_user = request.user
+    coursefee=0
+    payment=0
+    studentcoursedata=AdmittedCourseModel.objects.filter(Courseuser=current_user)
+    for batch in studentcoursedata:
+        coursefee += int(batch.CourseFee)
+        payment += int(batch.Payment)
+    due = int(coursefee) - int(payment)
+    
+
+    spenttime = 0
+    lecture = 0
+    project = 0
+    for batch in studentcoursedata:
+        course = get_object_or_404(CourseInfoModel,CourseName =batch.LearningBatch.CourseName)
+        spenttime += int(course.CourseDuration)
+        lecture += int(course.Lecture)
+        project += int(course.TotalProject)
+    
     
     context = {
         'teacherdata':teacherdata,
@@ -87,6 +108,15 @@ def dashboard(request):
         'totalbatch':totalbatch,
         'totalcourse':totalcourse,
         'combined_data':combined_data,
+        
+        #------Student---------
+        'studentcoursedata':studentcoursedata,
+        'coursefee':coursefee,
+        'payment':payment,
+        'due':due,
+        'spenttime':spenttime,
+        'lecture':lecture,
+        'project':project,
     }
     
     return render(request,'common/dashboard.html',context)
