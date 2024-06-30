@@ -27,6 +27,7 @@ urlpatterns = [
     path('coursedetails/<str:myid>',coursedetails,name="coursedetails"),
     path('batchdetails/<str:myid>',batchdetails,name="batchdetails"),
     path('coursereview/',coursereview,name="coursereview"),
+    path('applybatch/<str:myid>',applybatch,name="applybatch"),
     
     #----------Contact------------
     path('contactpage/',contactpage,name="contactpage"),

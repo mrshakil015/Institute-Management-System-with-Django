@@ -190,4 +190,35 @@ class WebsiteContacForm(forms.ModelForm):
             "YoutubeLink": "Youtube Link",
             "TwitterLink" : "Twitter Link",
         }
-    
+
+class PendingStudentForm(forms.ModelForm):
+    class Meta:
+        model = PendingStudentModel
+        fields = "__all__"
+        
+        widgets = {
+            'DOB':forms.DateInput(attrs={
+                'type': 'date'
+            }),
+        }
+        
+        labels = {
+            "CourseName": "Course Name",
+            "FatherName": "Father Name",
+            "MotherName": "Mother Name",
+            "DOB": "Date of Birth",
+            "EmergencyContact": "Emergency Contact",
+            "PresentAddress": "Present Address",
+            "PermanentAddress": "Permanent Address",
+            "StudentName":"Student Name",
+            "StudentPhoto":"Student Photo",
+            "EducationalQualification":"Educational Qualification",
+        }
+        
+        
+        
+    def __init__(self, *args, **kwargs):
+        super(PendingStudentForm, self).__init__(*args, **kwargs)
+        self.fields['BatchNo'].widget.attrs['readonly'] = True
+        self.fields['CourseName'].widget.attrs['readonly'] = True
+        

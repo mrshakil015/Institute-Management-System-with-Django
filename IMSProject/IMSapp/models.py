@@ -151,3 +151,26 @@ class ReviewModel(models.Model):
     CourseName= models.ForeignKey(CourseInfoModel,on_delete =models.SET_NULL, related_name="reviewcourseinfo",null=True)
     ReviewDate=models.DateField(auto_now_add=True,null=True)
     Status = models.CharField(max_length=50, default='Pending',null=True)
+    
+    
+class PendingStudentModel(models.Model):
+    BatchNo= models.CharField(max_length=100,null=True)
+    CourseName= models.CharField(max_length=100,null=True)
+    StudentName=models.CharField(max_length=100,null=True)
+    StudentPhoto=models.ImageField(upload_to='media/pendingstudentPhoto',null=True)
+    AdmissionDate=models.DateField(auto_now_add=True,null=True)
+    EducationalQualification=models.CharField(max_length=100,null=True)
+    FatherName=models.CharField(max_length=100,null=True)
+    MotherName=models.CharField(max_length=100,null=True)
+    Religion=models.CharField(max_length=100,null=True)
+    DOB=models.DateField(null=True)
+    GENDER=[
+        ('Male','Male'),
+        ('Female','Female'),
+        ('Other','Other'),
+    ]
+    Gender=models.CharField(choices=GENDER,max_length=100,null=True)
+    Mobile=models.CharField(max_length=100,null=True)
+    EmergencyContact=models.CharField(max_length=100,null=True)
+    PresentAddress=models.CharField(max_length=100,null=True)
+    PermanentAddress=models.CharField(max_length=100,null=True)

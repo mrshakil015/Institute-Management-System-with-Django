@@ -8,14 +8,14 @@
         color: #666;
         text-align: left;
         font-weight: bold;
+        display: block;
     }
     
-    input,select,textarea {
+    input, select, textarea {
         margin-bottom: 15px;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
-        
         width: 100%;
     }
     
@@ -24,6 +24,20 @@
     textarea:focus {
         border-color: #007bff;
         outline: none;
+    }
+    
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .form-row label {
+        grid-column: span 1;
+    }
+    
+    .form-row input {
+        grid-column: span 1;
     }
 </style>
 
@@ -51,16 +65,16 @@
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="col-12">
-                            <h5 class="form-title"><span><strong>Student Personal Information</strong></span></h5>
-                            {% include 'common/messages.html' %}
-                            <hr>
-                        </div>
+                    <div class="col-12">
+                        <h5 class="form-title"><span><strong>Student Personal Information</strong></span></h5>
+                        {% include 'common/messages.html' %}
+                        <hr>
+                    </div>
+                    <div class="form-row">
                         {{studentform}}
                         {{personalform}}
 
-                        <div class="col-12">
+                        <div class="col-12 mt-4 pt-1">
                             <button type="submit" class="btn btn-primary">Add Student</button>
                         </div>
                     </div>

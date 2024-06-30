@@ -50,6 +50,10 @@ class ReviewModel_Display(admin.ModelAdmin):
     list_display=['Imsuser']
 admin.site.register(ReviewModel,ReviewModel_Display)
 
+class Pendingstudent_Display(admin.ModelAdmin):
+    list_display=['BatchNo']
+admin.site.register(PendingStudentModel,Pendingstudent_Display)
+
 
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 from IMSapp.models import *
+from IMSapp.forms import *
 
 from django.contrib import messages
 
@@ -37,15 +38,18 @@ def homepage(request):
     context = {
         'teacherdata':teacherdata,
         'teachercount':teachercount,
+        
         'coursestudent':coursestudent,
         'coursedata':coursedata,
-        'contactdata':contactdata,
-        'categorydata':categorydata,
         'coursecount':coursecount,
+        'categorydata':categorydata,
+        
+        'contactdata':contactdata,
         'batchdata':batchdata,
+        'batchcount':batchcount,
+        
         'studentcount':studentcount,
         'enrolledstudent':enrolledstudent,
-        'batchcount':batchcount,
         'path':current_path,
     }
     return render(request,'common/homepage.html',context)
@@ -284,3 +288,30 @@ def reviewlist(request):
         'reviewdata':reviewdata        
     }
     return render(request,'common/reviewlist.html',context)
+
+def applybatch(request, myid):
+    batchdata = get_object_or_404(BatchInfoModel, BatchNo=myid)
+    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    current_path = request.path
+    coursename = batchdata.CourseName
+    if request.method == "POST":
+        applyform = PendingStudentForm(request.POST, request.FILES)
+        if applyform.is_valid():
+            applyform.save()
+            messages.success(request,'Successfully Apply.')            
+            return redirect('batches')
+    else:
+        initial_data = {'BatchNo': batchdata, 'CourseName':coursename}
+        applyform = PendingStudentForm(initial=initial_data)
+    
+    context = {
+        'pagetitle': 'Apply For Batch',
+        'subtitle': 'Apply',
+        'contactdata': contactdata,
+        'path': current_path,
+        'applyform': applyform,
+        'batchdata':batchdata,
+    }
+    
+    return render(request, 'common/applybatch.html', context)
+

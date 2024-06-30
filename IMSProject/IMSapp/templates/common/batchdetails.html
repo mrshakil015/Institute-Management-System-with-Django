@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <p class="card-title">Course Fee</p>
                                 <h5 class="card-text mb-3">BDT {{batchdata.CourseName.CourseFee}}</h5>
-                                <a href="{% url 'upcommingbatch' %}" class="btn btn-light btn-block text-danger">
+                                <a href="{% url 'applybatch' batchdata.BatchNo %}" class="btn btn-light btn-block text-danger">
                                     <i class="bi bi-send-fill"></i> Apply For Batch
                                 </a>
                             </div>
@@ -154,14 +154,8 @@
 
                 <p>{{batchdata.CourseName.ShortSummary}}</p>
 
-                <div class="row mb-4">
-                    <div class="col-md-12">
-                        <a href="{% url 'upcommingbatch' %}" class="btn btn-primary btn-block">
-                            <i class="bi bi-send-fill"></i> Apply For Batch
-                        </a>
-                    </div>
-                </div>
-                <div class="row mt-5 mb-5">
+                
+                <div class="row mt-4 mb-5">
                     <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
                         <h3>Course Overview</h3>
                         <p>{{batchdata.CourseName.CourseOverview}}</p>
