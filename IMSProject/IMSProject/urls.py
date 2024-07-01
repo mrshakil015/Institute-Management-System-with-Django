@@ -76,6 +76,7 @@ urlpatterns = [
     path('teachersalaryinfo/',teachersalaryinfo,name="teachersalaryinfo"),
     path('teacherattendence/',teacherattendence,name="teacherattendence"),
 
+    path('submitattendance/',submitattendance,name="submitattendance"),
 
     #------------Batches---------------
     path('addbatch/',addbatch,name="addbatch"),

@@ -61,5 +61,6 @@ admin.site.register(PendingStudentModel,Pendingstudent_Display)
 class StudentAttendanceModel_Display(admin.ModelAdmin):
     list_display=['Student','BatchNo','Attendance']
 admin.site.register(StudentAttendanceModel,StudentAttendanceModel_Display)
+admin.site.register(TeacherAttendance)
 
 

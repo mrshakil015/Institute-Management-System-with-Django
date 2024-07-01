@@ -192,3 +192,15 @@ class StudentAttendanceModel(models.Model):
     Attendance = models.CharField(choices = ATTENDANCE, max_length=20,default='Absent', null=True)
     BatchNo =models.ForeignKey(BatchInfoModel, on_delete=models.SET_NULL, null=True)
     Date = models.DateField(null=True)
+    
+class TeacherAttendance(models.Model):
+    Teacher = models.ForeignKey(TeacherModel, on_delete= models.CASCADE, null=True)
+    ATTENDANCE = [
+        ('Present','Present'),
+        ('Absent','Absent'),
+        ('Pending','Pending'),
+    ]
+    Attendance = models.CharField(choices = ATTENDANCE, max_length=20, null=True)
+    Date = models.DateField(null=True)
+    date_time = models.DateTimeField(null=True)
+    

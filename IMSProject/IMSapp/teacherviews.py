@@ -3,6 +3,7 @@ from IMSapp.forms import *
 from IMSapp.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from datetime import date, datetime
 import secrets
 import string
 import os
@@ -121,5 +122,39 @@ def teachersalaryinfo(request):
 
 @login_required
 def teacherattendence(request):
+    current_date = date.today() 
+    current_user = request.user
+    teacherdata = get_object_or_404(TeacherModel, EmployID=current_user)
     
-    return render(request,'teachers/teacherattendence.html') 
+    try:
+        getattendance = TeacherAttendance.objects.filter(Teacher=teacherdata, Date=current_date).first()
+        print(getattendance)
+    except TeacherAttendance.DoesNotExist:
+        getattendance = None
+    
+    allattendance = TeacherAttendance.objects.filter(Teacher=teacherdata)
+    
+    context = {
+        'current_date': current_date,
+        'getattendance': getattendance,
+        'allattendance': allattendance,
+    }
+    return render(request, 'teachers/teacherattendence.html', context)
+
+
+def submitattendance(request):
+    current_date = date.today() 
+    current_time = datetime.now()
+    current_user = request.user
+    teacherdata = get_object_or_404(TeacherModel, EmployID=current_user)
+    attendance = 'Pending'
+    
+    data = TeacherAttendance(
+        Teacher=teacherdata,
+        Attendance=attendance,
+        Date=current_date,
+        date_time=current_time,
+    )
+    data.save()
+    
+    return redirect('teacherattendence')
