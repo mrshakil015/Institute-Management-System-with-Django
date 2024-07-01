@@ -15,6 +15,7 @@ def homepage(request):
     batchdata = BatchInfoModel.objects.all()
     teacherdata = TeacherModel.objects.all()
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    getcourseReview = ReviewModel.objects.filter(Status = 'Approved')
     
     
     coursecount = coursedata.count()
@@ -51,6 +52,9 @@ def homepage(request):
         'studentcount':studentcount,
         'enrolledstudent':enrolledstudent,
         'path':current_path,
+        
+        'getcourseReview':getcourseReview,
+        
     }
     return render(request,'common/homepage.html',context)
 
@@ -182,6 +186,8 @@ def coursedetails(request, myid):
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
     studentcount = AdmittedCourseModel.objects.filter(CourseName = coursedata).count()
     all_courses = CourseInfoModel.objects.all()
+    getcourseReview = ReviewModel.objects.filter(CourseName=coursedata,Status='Approved')
+    print(getcourseReview)
     
     context = {
         'pagetitle':coursedata,
@@ -189,6 +195,7 @@ def coursedetails(request, myid):
         'coursedata':coursedata,
         'contactdata':contactdata,
         'studentcount':studentcount,
+        'getcourseReview': getcourseReview,
         'all_courses': all_courses,
     }
     
@@ -209,7 +216,6 @@ def batches(request):
     
     return render(request,'common/batches.html',context)
 
-@login_required
 def batchdetails(request, myid):
     batchdata = get_object_or_404(BatchInfoModel, id = myid)
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
@@ -359,7 +365,7 @@ def coursereview(request):
         current_user = request.user
 
         admittedcoursedata = AdmittedCourseModel.objects.filter(Courseuser=current_user).exists()
-        courseinfo = get_object_or_404(CourseInfoModel, id=courseName)
+        courseinfo = get_object_or_404(CourseInfoModel, CourseName=courseName)
         userdata = get_object_or_404(StudentModel, Imsuser=current_user)
         
         if admittedcoursedata:
