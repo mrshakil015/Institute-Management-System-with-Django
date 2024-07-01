@@ -56,7 +56,6 @@ urlpatterns = [
     path('studentList/',studentlist,name="studentList"),
     path('viewstudent/',viewstudent,name="viewstudent"),
     path('studentAttendance/',studentAttendance,name="studentAttendance"),
-    path('searchBatch/',searchBatch,name="searchBatch"),
     path('studentbatches/',studentbatches,name="studentbatches"),
     path('studentongoingbatch/',studentongoingbatch,name="studentongoingbatch"),
     path('studentInfo/',studentInfo,name="studentInfo"),

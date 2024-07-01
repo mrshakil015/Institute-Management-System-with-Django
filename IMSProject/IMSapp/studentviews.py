@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from IMSapp.forms import *
 import secrets
 import string
@@ -326,30 +327,61 @@ def deletependingstudent(request, myid):
 @login_required
 def studentAttendance(request):
     context = {}
-    
+
     if request.method == 'POST':
-        searchform = searchBatchForm(request.POST)
-        
-        if searchform.is_valid():
-            batchno = searchform.cleaned_data['batch']
-            batchinfo = get_object_or_404(BatchInfoModel, BatchNo=batchno)
-            print("batch data: ",batchinfo)
-            enrolldata = AdmittedCourseModel.objects.filter(LearningBatch=batchinfo)
-            
-            combined_data = []
-            for data in enrolldata:
-                studentid = data.StudentID
-                studentdata = StudentModel.objects.get(StudentID = studentid)
-                combined_data.append({
-                    'enrolldata':enrolldata,
-                    'studentdata':studentdata,
+        if 'date' in request.POST:
+            date = request.POST['date']
+            batch_no = request.POST['batch_no']
+            if not date:
+                return render(request, 'students/studentAttendance.html', {
+                    'error': 'Date is required',
+                    'searchform': searchBatchForm(),
+                    'batchno': batch_no,
+                    'combined_data': combined_data
                 })
+            try:
+                batchinfo = get_object_or_404(BatchInfoModel, BatchNo=batch_no)
+                
+                for student in request.POST:
+                    if student.startswith('attendance_'):
+                        student_id = student.split('_')[1]
+                        attendance_value = request.POST[student]
+                        
+                        student_instance = get_object_or_404(StudentModel, StudentID=student_id)
+                        attendance_record = StudentAttendanceModel(
+                            Student=student_instance,
+                            Attendance=attendance_value,
+                            BatchNo=batchinfo,
+                            Date=date
+                        )
+                        attendance_record.save()
+                return redirect('studentList')  # Redirect to a success page or the same page with a success message
             
-            context = {
-                'searchform': searchform,
-                'batchinfo': batchinfo,
-                'combined_data': combined_data,
-            }
+            except ValidationError:
+                context['error'] = 'Invalid date format. Please use YYYY-MM-DD format.'
+        else:
+            # Process batch search form submission
+            searchform = searchBatchForm(request.POST)
+            if searchform.is_valid():
+                batchno = searchform.cleaned_data['batch']
+                batchinfo = get_object_or_404(BatchInfoModel, BatchNo=batchno)
+                enrolldata = AdmittedCourseModel.objects.filter(LearningBatch=batchinfo)
+                
+                combined_data = []
+                for data in enrolldata:
+                    studentid = data.StudentID
+                    studentdata = StudentModel.objects.get(StudentID=studentid)
+                    combined_data.append({
+                        'enrolldata': enrolldata,
+                        'studentdata': studentdata,
+                    })
+                
+                context = {
+                    'searchform': searchform,
+                    'batchinfo': batchinfo,
+                    'batchno': batchno,
+                    'combined_data': combined_data,
+                }
     else:
         searchform = searchBatchForm()
         
@@ -358,16 +390,6 @@ def studentAttendance(request):
         }
     
     return render(request, 'students/studentAttendance.html', context)
-
-def searchBatch(request):
-    searchform = searchBatchForm()
-    
-    context = {
-        'searchform':searchform
-    }
-
-    
-    return render(request,'students/studentAttendance.html',context)
 
 @login_required
 def studentInfo(request):

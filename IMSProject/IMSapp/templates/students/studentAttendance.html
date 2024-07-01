@@ -30,7 +30,6 @@
     .form-row {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
     }
 
     .form-row label {
@@ -39,6 +38,26 @@
 
     .form-row input {
         grid-column: span 1;
+    }
+
+    .form-group.row {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        margin: -1px 0 0 0; /* To merge borders between rows */
+    }
+
+    .form-group.row.header {
+        background-color: #f9f9f9;
+        font-weight: bold;
+    }
+
+    .form-group.row div {
+        border-left: 1px solid #ddd;
+    }
+
+    .form-group.row div:first-child {
+        border-left: none;
     }
 </style>
 <div class="col-sm-12 col-md-12">
@@ -66,40 +85,47 @@
 <div class="container mt-5">
     <div class="card p-3">
         <h2 class="mb-4">Student Attendance Form</h2>
-        <form action="/submit-attendance" method="post">
+        <form action="{% url 'studentAttendance' %}" method="POST">
             {% csrf_token %}
             <div class="form-group row">
                 <label for="date" class="col-sm-2 col-form-label">Date</label>
                 <div class="col-sm-10">
-                    <input type="date" class="form-control" id="date" name="date">
+                    <input type="date" class="form-control" id="date" name="date" required>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="display table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Student ID</th>
-                            <th>Student Name</th>
-                            <th>Attendance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for student in combined_data %}
-                        <tr>
-                            <td>{{ student.studentdata.StudentID }}</td>
-                            <td>{{ student.studentdata.StudentName }}</td>
-                            <td>
-                                <select class="form-control" name="attendance[{{ student.StudentID }}]">
-                                    <option value="Present">Present</option>
-                                    <option value="Absent">Absent</option>
-                                </select>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="form-group row">
+                <label for="batch_no" class="col-sm-2 col-form-label">Batch Number</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="batch_no" value="{{ batchno }}" name="batch_no" readonly>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit Attendance</button>
+        
+            <!-- Table Headers -->
+            <div class="form-group row font-weight-bold header">
+                <div class="col-sm-3">Student ID</div>
+                <div class="col-sm-3">Student Name</div>
+                <div class="col-sm-6">Attendance</div>
+            </div>
+        
+            <!-- Student Rows -->
+            {% for student in combined_data %}
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <input type="text" class="form-control-plaintext" value="{{ student.studentdata.StudentID }}" readonly>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control-plaintext" value="{{ student.studentdata.StudentName }}" readonly>
+                </div>
+                <div class="col-sm-6">
+                    <select class="form-control" name="attendance_{{ student.studentdata.StudentID }}">
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+        
+            <button type="submit" class="btn btn-primary mt-3">Submit Attendance</button>
         </form>
     </div>
 </div>
