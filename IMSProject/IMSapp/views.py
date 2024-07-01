@@ -209,6 +209,7 @@ def batches(request):
     
     return render(request,'common/batches.html',context)
 
+@login_required
 def batchdetails(request, myid):
     batchdata = get_object_or_404(BatchInfoModel, id = myid)
     contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
@@ -216,9 +217,24 @@ def batchdetails(request, myid):
     totalstudent = batchdata.TotalStudent
     remainstudent = int(totalstudent) - int(studentcount)
     current_path = request.path
+    batchteachers = batchdata.BatchInstructor
+    teachers_list = [teacher.strip() for teacher in batchteachers.split(',')]
+    
+    teacherinfo =[]
+    for teacherid in teachers_list:
+        teacher  = get_object_or_404(TeacherModel, EmployID = teacherid)
+        teacherinfo.append({
+            'EmployID': teacher.EmployID,
+            'TeacherName': teacher.TeacherName,
+            'Designation': teacher.Designation,
+            'TeacherPhoto': teacher.TeacherPhoto.url if teacher.TeacherPhoto else None,
+        })
+        print(teacher.TeacherPhoto.url)
+
     
     context = {
         'batchdata':batchdata,
+        'teacherinfo':teacherinfo,
         'pagetitle':'Batch Details',
         'subtitle':'Batches',
         'headtitle': 'Batch Details',
