@@ -1,7 +1,7 @@
 <div class="row">
     {% for i in coursestudent %}
 
-    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+    <div class="col-lg-4 mt-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
      <div class="course-item">
        <a href="{% url 'coursedetails' i.course.id %}">
          <img src="{{i.course.CourseImage.url}}" class="img-fluid" alt="...">

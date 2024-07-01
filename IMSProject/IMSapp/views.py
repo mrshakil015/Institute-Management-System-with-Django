@@ -134,6 +134,9 @@ def loginpage(request):
         if user:
             login(request,user)
             return redirect('dashboard')
+        else:
+            return redirect('loginpage')
+        
     
     return render(request, 'common/login.html')
 
