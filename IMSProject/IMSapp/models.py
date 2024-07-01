@@ -99,6 +99,14 @@ class TeacherModel(models.Model):
     JoinDate = models.DateField(auto_now_add=True,null=True)
     TeacherPhoto=models.ImageField(upload_to='media/teacherphoto',null=True)
     
+    def __str__(self):
+        return self.EmployID
+    
+class TeacherBatchModel(models.Model):
+    teacheruser = models.ForeignKey(TeacherModel, on_delete=models.CASCADE, related_name='teacherbatchinfo', null=True)
+    batch = models.ForeignKey(BatchInfoModel, on_delete=models.CASCADE, related_name='teacherbatch', null=True)
+
+    
 class WebsiteContactModel(models.Model):
     Imsuser = models.CharField(max_length=50,null=True)
     Mobile = models.CharField(max_length=50,null=True)

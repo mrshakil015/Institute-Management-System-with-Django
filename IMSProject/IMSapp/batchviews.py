@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from IMSapp.models import *
 from IMSapp.forms import *
 
@@ -7,8 +8,32 @@ from IMSapp.forms import *
 def addbatch(request):
     if request.method == 'POST':
         batchform = BatchInfoForm(request.POST)
+        
         if batchform.is_valid():
-            batchform.save()
+            batch = batchform.save(commit=False)
+            batchteacher = batch.BatchInstructor
+            batchno = batch.BatchNo
+            teachers_list = [teacher.strip() for teacher in batchteacher.split(',')]
+
+            for teacherid in teachers_list:
+                try:
+                    teacher_instance = TeacherModel.objects.get(EmployID=teacherid)
+                    
+                except TeacherModel.DoesNotExist:
+                    messages.error(request, "Teacher Id not exists.")
+                    return render(request, "batches/addbatch.html", {
+                        'batchform': batchform,
+                    })
+                
+                batch.save()
+                batchdata = get_object_or_404(BatchInfoModel, BatchNo=batchno)
+                teacherassign = TeacherBatchModel(
+                    teacheruser= teacher_instance,
+                    batch=batchdata,
+                )
+                teacherassign.save()
+                print("teacher data: ", teacher_instance)
+
             return redirect('batchlist')
     else:
         batchform = BatchInfoForm()

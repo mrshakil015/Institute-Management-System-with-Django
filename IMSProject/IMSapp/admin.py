@@ -30,6 +30,10 @@ class TeacherModel_Dispaly(admin.ModelAdmin):
     list_display=['Imsuser','TeacherName','Designation']
 admin.site.register(TeacherModel,TeacherModel_Dispaly)
 
+class TeacherBatch_Display(admin.ModelAdmin):
+    list_display=['teacheruser','batch']
+admin.site.register(TeacherBatchModel,TeacherBatch_Display)
+
 class StaffModel_Display(admin.ModelAdmin):
     list_display=['Imsuser','StaffName','EmployID']
 admin.site.register(StaffModel,StaffModel_Display)
