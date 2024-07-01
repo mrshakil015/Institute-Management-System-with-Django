@@ -14,7 +14,7 @@ def homepage(request):
     studentdata = StudentModel.objects.all()
     batchdata = BatchInfoModel.objects.all()
     teacherdata = TeacherModel.objects.all()
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     getcourseReview = ReviewModel.objects.filter(Status = 'Approved')
     
     
@@ -148,7 +148,7 @@ def logoutPage(request):
 
 def teachers(request):
     teacherdata = TeacherModel.objects.all()
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     current_path = request.path
     context = {
         'pagetitle':'Meet with Our Makers',
@@ -162,7 +162,7 @@ def teachers(request):
 
 def courses(request):
     coursedata = CourseInfoModel.objects.all()
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     
     #------No of Student in a Course
     coursestudent = []
@@ -186,7 +186,7 @@ def courses(request):
 
 def coursedetails(request, myid):
     coursedata = get_object_or_404(CourseInfoModel, id=myid)
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     studentcount = AdmittedCourseModel.objects.filter(CourseName = coursedata).count()
     all_courses = CourseInfoModel.objects.all()
     getcourseReview = ReviewModel.objects.filter(CourseName=coursedata,Status='Approved')
@@ -206,7 +206,7 @@ def coursedetails(request, myid):
 
 def batches(request):
     batchdata = BatchInfoModel.objects.all()
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     current_path = request.path
     context = {
         'pagetitle':'All Batches',
@@ -221,7 +221,7 @@ def batches(request):
 
 def batchdetails(request, myid):
     batchdata = get_object_or_404(BatchInfoModel, id = myid)
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     studentcount = AdmittedCourseModel.objects.filter(LearningBatch=batchdata).count()
     totalstudent = batchdata.TotalStudent
     remainstudent = int(totalstudent) - int(studentcount)
@@ -257,7 +257,7 @@ def batchdetails(request, myid):
 
 def upcommingbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='Upcomming')
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     current_path = request.path
     context = {
         'pagetitle':'All Batches',
@@ -272,7 +272,7 @@ def upcommingbatch(request):
 
 def ongoingbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='On-Going')
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     current_path = request.path
     context = {
         'pagetitle':'All Batches',
@@ -287,7 +287,7 @@ def ongoingbatch(request):
 
 def completedbatch(request):
     batchdata = BatchInfoModel.objects.filter(Status='Completed')
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     current_path = request.path
     context = {
         'pagetitle':'All Batches',
@@ -301,7 +301,7 @@ def completedbatch(request):
     return render(request,'common/completedbatch.html',context)
 
 def contactpage(request):
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     current_path = request.path
     context = {
         'pagetitle':'Contact US',
@@ -313,7 +313,7 @@ def contactpage(request):
 
 def applybatch(request, myid):
     batchdata = get_object_or_404(BatchInfoModel, BatchNo=myid)
-    contactdata = WebsiteContactModel.objects.get(Imsuser='Authority')
+    contactdata = WebsiteContactModel.objects.all()
     current_path = request.path
     coursename = batchdata.CourseName
     if request.method == "POST":

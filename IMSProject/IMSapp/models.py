@@ -52,7 +52,7 @@ class CourseInfoModel(models.Model):
     JobPositions=models.TextField(null=True)
     CourseFee=models.IntegerField(null=True)
     IntroVideo=models.CharField(max_length=200, null=True)
-    CourseImage=models.ImageField(upload_to='media/courseImage', null=True)
+    CourseImage=models.ImageField(upload_to='courseImage', null=True)
     
     def __str__(self):
         return self.CourseName
@@ -61,7 +61,7 @@ class StudentModel(models.Model):
     Imsuser=models.OneToOneField(IMSUserModel,on_delete=models.CASCADE,related_name='studentinfo',null=True)
     StudentID=models.CharField(max_length=100,null=True)
     StudentName=models.CharField(max_length=100,null=True)
-    StudentPhoto=models.ImageField(upload_to='media/studentPhoto',null=True)
+    StudentPhoto=models.ImageField(upload_to='studentPhoto',null=True)
     AdmissionDate=models.DateField(auto_now_add=True,null=True)
     EducationalQualification=models.CharField(max_length=100,null=True)
     LinkedInLink =models.CharField(max_length=150,null=True)
@@ -97,7 +97,7 @@ class TeacherModel(models.Model):
     GithubLink =models.CharField(max_length=150,null=True)
     FacebookLink =models.CharField(max_length=150,null=True)
     JoinDate = models.DateField(auto_now_add=True,null=True)
-    TeacherPhoto=models.ImageField(upload_to='media/teacherphoto',null=True)
+    TeacherPhoto=models.ImageField(upload_to='teacherphoto',null=True)
     
     def __str__(self):
         return self.EmployID
@@ -141,7 +141,7 @@ class StaffModel(models.Model):
     EmployID=models.CharField(max_length=150,null=True)
     StaffDesignation=models.CharField(max_length=150,null=True)
     JoinDate = models.DateField(auto_now_add=True,null=True)
-    StaffPhoto=models.ImageField(upload_to='media/staffphoto',null=True)
+    StaffPhoto=models.ImageField(upload_to='staffphoto',null=True)
 
 ## ‍SalaryModel
 
@@ -165,7 +165,7 @@ class PendingStudentModel(models.Model):
     BatchNo= models.CharField(max_length=100,null=True)
     CourseName= models.CharField(max_length=100,null=True)
     StudentName=models.CharField(max_length=100,null=True)
-    StudentPhoto=models.ImageField(upload_to='media/pendingstudentPhoto',null=True)
+    StudentPhoto=models.ImageField(upload_to='pendingstudentPhoto',null=True)
     AdmissionDate=models.DateField(auto_now_add=True,null=True)
     EducationalQualification=models.CharField(max_length=100,null=True)
     FatherName=models.CharField(max_length=100,null=True)
