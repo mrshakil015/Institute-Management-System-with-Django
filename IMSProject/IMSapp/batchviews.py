@@ -88,17 +88,19 @@ def viewbatch(request, myid):
     totalstudent = enrolledstudent.count()
     print("Enrolled data: ",enrolledstudent)
     
-    # combined_data = []
-    # for data in enrolledstudent:
-    #     studentdata = IMSUserModel.objects.filter(username = data)
-    #     print("student: ",studentdata)
+    combined_data = []
+    for data in enrolledstudent:
+        studentid = data.StudentID
+        studentdata = StudentModel.objects.get(StudentID = studentid)
+        combined_data.append({
+            'enrolldata':data,
+            'studentdata':studentdata,
+        })
         
-        
-    
     context = {
         'batchdata':batchdata,
         'totalstudent':totalstudent,
         'enrolledstudent':enrolledstudent,
+        'combined_data':combined_data,
     }
-    
     return render(request,"batches/viewbatch.html",context)     

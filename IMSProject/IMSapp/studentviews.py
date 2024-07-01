@@ -325,7 +325,49 @@ def deletependingstudent(request, myid):
 
 @login_required
 def studentAttendance(request):
-    return render(request,'students/studentAttendance.html')
+    context = {}
+    
+    if request.method == 'POST':
+        searchform = searchBatchForm(request.POST)
+        
+        if searchform.is_valid():
+            batchno = searchform.cleaned_data['batch']
+            batchinfo = get_object_or_404(BatchInfoModel, BatchNo=batchno)
+            print("batch data: ",batchinfo)
+            enrolldata = AdmittedCourseModel.objects.filter(LearningBatch=batchinfo)
+            
+            combined_data = []
+            for data in enrolldata:
+                studentid = data.StudentID
+                studentdata = StudentModel.objects.get(StudentID = studentid)
+                combined_data.append({
+                    'enrolldata':enrolldata,
+                    'studentdata':studentdata,
+                })
+            
+            context = {
+                'searchform': searchform,
+                'batchinfo': batchinfo,
+                'combined_data': combined_data,
+            }
+    else:
+        searchform = searchBatchForm()
+        
+        context = {
+            'searchform': searchform,
+        }
+    
+    return render(request, 'students/studentAttendance.html', context)
+
+def searchBatch(request):
+    searchform = searchBatchForm()
+    
+    context = {
+        'searchform':searchform
+    }
+
+    
+    return render(request,'students/studentAttendance.html',context)
 
 @login_required
 def studentInfo(request):

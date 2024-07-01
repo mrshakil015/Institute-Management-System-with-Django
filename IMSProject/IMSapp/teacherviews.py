@@ -121,4 +121,5 @@ def teachersalaryinfo(request):
 
 @login_required
 def teacherattendence(request):
+    
     return render(request,'teachers/teacherattendence.html') 

@@ -231,4 +231,9 @@ class PendingStudentForm(forms.ModelForm):
         super(PendingStudentForm, self).__init__(*args, **kwargs)
         self.fields['BatchNo'].widget.attrs['readonly'] = True
         self.fields['CourseName'].widget.attrs['readonly'] = True
-        
+
+class searchBatchForm(forms.ModelForm):
+    class Meta:
+        model = TeacherBatchModel
+        fields = "__all__"
+        exclude = ['teacheruser']

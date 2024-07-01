@@ -150,13 +150,13 @@
             </tfoot>
             <tbody>
               
-              {% for i in enrolledstudent %}
+              {% for i in combined_data %}
                 <tr>
                   <td>{{forloop.counter}}</td>
-                  <td>{{i.StudentID}}</td>
-                  <td>{{i.Studentuser.StudentName}}</td>
-                  <td>{{i.Payment}}</td>
-                  <td>{{i.Due}}</td>
+                  <td>{{i.enrolldata.StudentID}}</td>
+                  <td>{{i.studentdata.StudentName}}</td>
+                  <td>{{i.enrolldata.Payment}}</td>
+                  <td>{{i.enrolldata.Due}}</td>
                   <td>
                     <div class="form-button-action">
                       <a href="" class="btn btn-link btn-primary btn-md">

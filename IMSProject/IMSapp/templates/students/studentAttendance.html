@@ -1,7 +1,106 @@
 {% extends 'profilemaster/master.html' %}
 
-
 {% block content %}
-    
+<style>
+    label {
+        margin-bottom: 5px;
+        color: #666;
+        text-align: left;
+        font-weight: bold;
+        display: block;
+    }
+
+    input,
+    select,
+    textarea {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .form-row label {
+        grid-column: span 1;
+    }
+
+    .form-row input {
+        grid-column: span 1;
+    }
+</style>
+<div class="col-sm-12 col-md-12">
+    <div class="card card-stats card-round">
+        <div class="card-body">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div>
+                    <h3 class="fw-bold mb-3">Search Batch</h3>
+                </div>
+            </div>
+            <form action="{% url 'studentAttendance' %}" method="POST">
+                {% csrf_token %}
+                <div class="ms-md-auto py-2 py-md-0">
+                    {{ searchform }}
+                </div>
+
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">Search batch</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="card p-3">
+        <h2 class="mb-4">Student Attendance Form</h2>
+        <form action="/submit-attendance" method="post">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="date" class="col-sm-2 col-form-label">Date</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="date" name="date">
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="display table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Attendance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in combined_data %}
+                        <tr>
+                            <td>{{ student.studentdata.StudentID }}</td>
+                            <td>{{ student.studentdata.StudentName }}</td>
+                            <td>
+                                <select class="form-control" name="attendance[{{ student.StudentID }}]">
+                                    <option value="Present">Present</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Attendance</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}
-    

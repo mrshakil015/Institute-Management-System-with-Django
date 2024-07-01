@@ -182,3 +182,13 @@ class PendingStudentModel(models.Model):
     EmergencyContact=models.CharField(max_length=100,null=True)
     PresentAddress=models.CharField(max_length=100,null=True)
     PermanentAddress=models.CharField(max_length=100,null=True)
+
+class StudentAttendanceModel(models.Model):
+    Student = models.ForeignKey(StudentModel, on_delete=models.CASCADE, null=True)
+    ATTENDANCE = [
+        ('Present','Present'),
+        ('Absent','Absent'),
+    ]
+    Attendance = models.CharField(choices = ATTENDANCE, max_length=20,default='Absent', null=True)
+    BatchNo =models.ForeignKey(BatchInfoModel, on_delete=models.SET_NULL, null=True)
+    Date = models.DateField(null=True)
