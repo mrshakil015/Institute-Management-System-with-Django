@@ -384,3 +384,27 @@ def coursereview(request):
             messages.warning(request, 'You are not admitted to this course.')
 
     return redirect('courses')  # Redirect to courses or any appropriate view
+
+
+def teacherattendenceList(request):
+    teacherattendancedata = TeacherAttendance.objects.all().order_by('-date_time')
+    
+    context = {
+        'teacherattendancedata':teacherattendancedata,
+    }
+    
+    return render(request,'common/teacherattendancelist.html',context)
+
+def rejectattendance(request,myid):
+    teacherdata = get_object_or_404(TeacherAttendance, id=myid)
+    teacherdata.Attendance = 'Absent'
+    teacherdata.save()
+    
+    return redirect('teacherattendenceList')
+
+def accpetattendance(request,myid):
+    teacherdata = get_object_or_404(TeacherAttendance, id=myid)
+    teacherdata.Attendance = 'Present'
+    teacherdata.save()
+    
+    return redirect('teacherattendenceList')

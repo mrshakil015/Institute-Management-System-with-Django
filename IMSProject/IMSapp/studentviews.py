@@ -355,7 +355,7 @@ def studentAttendance(request):
                             Date=date
                         )
                         attendance_record.save()
-                return redirect('studentList')  # Redirect to a success page or the same page with a success message
+                return redirect('teacherbatchinfo')  # Redirect to a success page or the same page with a success message
             
             except ValidationError:
                 context['error'] = 'Invalid date format. Please use YYYY-MM-DD format.'

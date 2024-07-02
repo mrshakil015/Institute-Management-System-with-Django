@@ -76,6 +76,10 @@ urlpatterns = [
     path('teacherbatchinfo/',teacherbatchinfo,name="teacherbatchinfo"),
     path('teachersalaryinfo/',teachersalaryinfo,name="teachersalaryinfo"),
     path('teacherattendence/',teacherattendence,name="teacherattendence"),
+    path('teacherattendenceList/',teacherattendenceList,name="teacherattendenceList"),
+    path('accpetattendance/<str:myid>',accpetattendance,name="accpetattendance"),
+    path('rejectattendance/<str:myid>',rejectattendance,name="rejectattendance"),
+    
 
     path('submitattendance/',submitattendance,name="submitattendance"),
 
