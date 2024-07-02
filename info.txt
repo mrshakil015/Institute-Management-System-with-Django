@@ -7,11 +7,11 @@ Authority
     password = 1234  
 
 Student
-    username = 200121011
-    password = ]gp))?d;  
+    username = 24001
+    password = pmw$]cm{  
 Teacher
     username = 10031
-    password = 7/i&A1\]  
+    password = N%%7^e}l  
 
 
 Authority Create using shell:
