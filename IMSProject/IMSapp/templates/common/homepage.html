@@ -140,6 +140,7 @@
     </div>
   </div>
 </section><!-- /Features Section -->
+
 <!-- Popular Courses Section -->
 <section id="courses" class="courses section">
 
@@ -151,7 +152,7 @@
 
   <div class="container">
 
-    {% include 'common/coursesection.html' %}
+    {% include 'common/popularcourse.html' %}
   </div>
 
 </section><!-- /Courses Section -->
@@ -235,6 +236,7 @@
                       <div class="testimonial-item">
                           <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
                           <h3>{{i.Imsuser.StudentName}}</h3>
+                          <p>{{i.CourseName}}</p>
                           <div class="stars">
                               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                   class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i

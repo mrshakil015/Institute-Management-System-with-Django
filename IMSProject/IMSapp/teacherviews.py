@@ -160,7 +160,7 @@ def teacherattendence(request):
     except TeacherAttendance.DoesNotExist:
         getattendance = None
     
-    allattendance = TeacherAttendance.objects.filter(Teacher=teacherdata).order_by('date_time')
+    allattendance = TeacherAttendance.objects.filter(Teacher=teacherdata).order_by('-date_time')
     
     context = {
         'current_date': current_date,
