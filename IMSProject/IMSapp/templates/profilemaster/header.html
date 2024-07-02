@@ -53,7 +53,15 @@
 
         <li class="nav-item topbar-user dropdown hidden-caret">
           <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-            {% if user.UserType == 'Student' %}
+            {% if user.UserType == 'Authority' %}
+            <div class="avatar-sm">
+              <img src="{% static 'profileassets/img/kaiadmin/authoritylogo.png' %}" alt="..." class="avatar-img rounded-circle" />
+            </div>
+            <span class="profile-username">
+              <span class="fw-bold">Authority</span>
+            </span>
+
+            {% elif user.UserType == 'Student' %}
             <div class="avatar-sm">
               <img src="{{user.studentinfo.StudentPhoto.url}}" alt="..." class="avatar-img rounded-circle" />
             </div>
@@ -76,7 +84,15 @@
             <div class="dropdown-user-scroll scrollbar-outer">
               <li>
                 <div class="user-box">
-                  {% if user.UserType == 'Student' %}
+                  {% if user.UserType == 'Authority' %}
+                  <div class="avatar-lg">
+                    <img src="{% static 'profileassets/img/kaiadmin/authoritylogo.png' %}" alt="image profile" class="avatar-img rounded" />
+                  </div>
+                  <div class="u-text">
+                    <h4>Code Master</h4>
+                    <p class="text-muted">Academy</p>
+                  </div>
+                  {% elif user.UserType == 'Student' %}
                   <div class="avatar-lg">
                     <img src="{{user.studentinfo.StudentPhoto.url}}" alt="image profile" class="avatar-img rounded" />
                   </div>
@@ -99,9 +115,7 @@
                 </div>
               </li>
               <li>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">My Profile</a>
-                <a class="dropdown-item" href="#">Inbox</a>
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'logoutPage' %}">Logout</a>
               </li>

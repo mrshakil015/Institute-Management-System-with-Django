@@ -12,12 +12,12 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="{% url 'homepage' %}" {% if path == '/' %} class="active" {% endif %}>Home<br></a></li>
-          <li><a href="" {% if path == '/about/' %} class="active" {% endif %}>About</a></li>
+          <!-- <li><a href="" {% if path == '/about/' %} class="active" {% endif %}>About</a></li> -->
           <li><a href="{% url 'courses' %}" {% if path == '/courses/' %} class="active" {% endif %}>Courses</a></li>
           <li><a href="{% url 'batches' %}" {% if path == '/batches/' %} class="active" {% endif %}> Batches</a></li>
           <li><a href="{% url 'teachers' %}" {% if path == '/teachers/' %} class="active" {% endif %}>Trainers</a></li>
-          <li><a href="">Events</a></li>
-          <li><a href="">Gallery</a></li>
+          <!-- <li><a href="">Events</a></li>
+          <li><a href="">Gallery</a></li> -->
           <li><a href="{% url 'contactpage' %}" {% if path == '/contactpage/' %} class="active" {% endif %}>Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

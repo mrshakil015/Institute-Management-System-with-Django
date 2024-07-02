@@ -8,7 +8,7 @@
   <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
 
   <div class="container">
-    <h2 data-aos="fade-up" data-aos-delay="100">Learning Today,<br>Leading Tomorrow</h2>
+    <h2 data-aos="fade-up" data-aos-delay="100">Be Enlightened<br>to be Enshrined</h2>
     <h3 data-aos="fade-up" data-aos-delay="200">This Project developed by the team <strong>"Bug Fixers"</strong></h3>
     <h3 data-aos="fade-up" data-aos-delay="200"><strong>Team Members:</strong> Jessica, Tarek Mahmud, Fuad, Shakil</h3>
     <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
@@ -133,7 +133,7 @@
       <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
         <div class="features-item">
           <i class="bi bi-intersect" style="color: #31ce36;"></i>
-          <h3><a href="">{{i.CategoryName}}</a></h3>
+          <h3><a href="{% url 'categorydetails' i.id %}">{{i.CategoryName}}</a></h3>
         </div>
       </div><!-- End Feature Item -->
       {% endfor %}

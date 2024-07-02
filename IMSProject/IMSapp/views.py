@@ -360,6 +360,34 @@ def approvereview(request,myid):
         reviewdata.save()
     return redirect('reviewlist')
 
+def categorydetails(request, myid):
+    categorydata = CourseCategoryModel.objects.get(id = myid)
+    categoryname = categorydata.CategoryName
+    
+    coursedata = CourseInfoModel.objects.filter(CourseCategory = categorydata)
+    print("course data: ",coursedata)
+    contactdata = WebsiteContactModel.objects.all()
+    
+    #------No of Student in a Course
+    coursestudent = []
+    for course in coursedata:
+        nostudent = AdmittedCourseModel.objects.filter(CourseName=course).count()
+        coursestudent.append({
+            'course':course,
+            'student':nostudent,
+        })
+    current_path = request.path
+    context = {
+        'pagetitle':categoryname,
+        'subtitle':'Courses',
+        'coursedata':coursedata,
+        'coursestudent':coursestudent,
+        'contactdata':contactdata,
+        'path':current_path,
+    }
+    
+    return render(request,'common/categorydetails.html',context)
+
 def coursereview(request):
     if request.method == 'POST':
         courseid = request.POST.get('courseid')

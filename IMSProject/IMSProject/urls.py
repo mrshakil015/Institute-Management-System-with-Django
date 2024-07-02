@@ -44,6 +44,9 @@ urlpatterns = [
     path('editcategory/<str:myid>',editcategory,name="editcategory"),
     path('deletecategory/<str:myid>',deletecategory,name="deletecategory"),
     
+    path('deletecategory/<str:myid>',deletecategory,name="deletecategory"),
+    path('categorydetails/<str:myid>',categorydetails,name="categorydetails"),
+    
     path('addcourse/',addcourse,name="addcourse"),
     path('courselist/',courselist,name="courselist"),
     path('editcourse/<str:myid>',editcourse,name="editcourse"),
