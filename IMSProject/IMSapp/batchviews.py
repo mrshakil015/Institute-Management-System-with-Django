@@ -65,11 +65,47 @@ def batchlist(request):
 @login_required
 def editbatch(request,myid):
     batchdata= get_object_or_404(BatchInfoModel,id=myid)
+    previousteacher = batchdata.BatchInstructor
+
     if request.method == 'POST':
         batchform = BatchInfoForm(request.POST,instance=batchdata)
         if batchform.is_valid():
-            batchform.save()
-            return redirect('batchlist')
+            batch = batchform.save(commit=False)
+            batchteacher = batch.BatchInstructor
+            batchno = batch.BatchNo
+            teachers_list = [teacher.strip() for teacher in batchteacher.split(',')]
+            len(teachers_list)
+            teacher_instances = []
+            for teacherid in teachers_list:
+                try:
+                    teacher_instance = TeacherModel.objects.get(EmployID=teacherid)
+                    teacher_instances.append(teacher_instance)
+                except TeacherModel.DoesNotExist:
+                    messages.error(request, "Teacher Id not exists.")
+                    return render(request, "batches/addbatch.html", {
+                        'batchform': batchform,
+                    })
+                
+                if len(teachers_list) == len(teacher_instances):
+                    #------Delete previous teachers------------
+                    preteachers_list = [teacher.strip() for teacher in previousteacher.split(',')]
+                    for preteacherid in preteachers_list:
+                        preteacherdata = TeacherModel.objects.get(EmployID=preteacherid)
+                        prebatchdata = BatchInfoModel.objects.get(BatchNo=batchno)
+                        
+                        preteacher_instance = TeacherBatchModel.objects.get(teacheruser= preteacherdata, batch=prebatchdata)
+                        preteacher_instance.delete()
+                    
+                    batch.save()
+                    batchdata = get_object_or_404(BatchInfoModel, BatchNo=batchno)
+                    for teacher_instance in teacher_instances:
+                        teacherassign = TeacherBatchModel(
+                            teacheruser= teacher_instance,
+                            batch=batchdata,
+                        )
+                        teacherassign.save()
+
+                    return redirect('batchlist')
     else:
         batchform = BatchInfoForm(instance=batchdata)
     context = {
