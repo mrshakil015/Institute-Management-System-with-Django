@@ -453,3 +453,15 @@ def studentPayment(request):
         'due':due,
     }
     return render(request,'students/studentPayment.html',context)
+
+@login_required
+def studentAttendancelist(request):
+    current_user = request.user
+    studentdata = get_object_or_404(StudentModel, StudentID=current_user)
+
+    allattendance = StudentAttendanceModel.objects.filter(Student=studentdata).order_by('-Date')
+    
+    context = {
+        'allattendance': allattendance,
+    }
+    return render(request, 'students/studentattendancelist.html', context)

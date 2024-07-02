@@ -169,7 +169,6 @@ def teacherattendence(request):
     }
     return render(request, 'teachers/teacherattendence.html', context)
 
-
 def submitattendance(request):
     current_date = date.today() 
     current_time = datetime.now()

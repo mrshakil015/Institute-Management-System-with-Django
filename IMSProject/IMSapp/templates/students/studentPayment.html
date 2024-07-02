@@ -99,7 +99,9 @@
                 <th>Payment</th>
                 <th>Due</th>
                 <th>Admission Date</th>
+                {% if user.UserType == 'Authority' %}
                 <th>Action</th>
+                {% endif %}
               </tr>
             </thead>
   
@@ -112,7 +114,9 @@
                 <th>Payment</th>
                 <th>Due</th>
                 <th>Admission Date</th>
+                {% if user.UserType == 'Authority' %}
                 <th>Action</th>
+                {% endif %}
               </tr>
             </tfoot>
             <tbody>
@@ -127,18 +131,23 @@
                 <td>{{i.Payment}}</td>
                 <td>{{i.Due}}</td>
                 <td>{{i.CourseName}}</td>
+                
+                {% if user.UserType == 'Authority' %}
                 <td>
-                    <div class="form-button-action">
-                        <a href="{% url 'editstudent' i.id %}" class="btn btn-link btn-primary btn-md">
-                          <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="{% url 'deletestudent' i.id %}" class="btn btn-link btn-danger btn-md">
-                          <i class="fa fa-trash"></i>
-                        </a>
-                        
-                      </div>
-                </td>
-              </tr>
+                  <div class="form-button-action">
+                      <a href="{% url 'editstudent' i.id %}" class="btn btn-link btn-primary btn-md">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{% url 'deletestudent' i.id %}" class="btn btn-link btn-danger btn-md">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                      
+                    </div>
+              </td>
+            </tr>
+                  
+                {% endif %}
+                  
   
               {% endfor %}
   
