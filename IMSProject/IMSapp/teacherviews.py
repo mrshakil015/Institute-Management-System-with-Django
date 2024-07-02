@@ -114,7 +114,35 @@ def teacherpersonalinfo(request):
 
 @login_required
 def teacherbatchinfo(request):
-    return render(request,'teachers/teacherbatchinfo.html') 
+    current_user = request.user
+    
+    teacherdata = get_object_or_404(TeacherModel,Imsuser=current_user )
+    teacherbatchdata=TeacherBatchModel.objects.filter(teacheruser=teacherdata)
+    
+    combined_data = []
+    totalstudent = 0
+    for i in teacherbatchdata:
+        batchno = i.batch
+        batchdata = get_object_or_404(BatchInfoModel, BatchNo = batchno)
+        coursename = batchdata.CourseName
+        
+        #------ Enrolled Student Count-----------
+        enrolledstudent = AdmittedCourseModel.objects.filter(CourseName = coursename).count()
+        totalstudent += enrolledstudent
+        combined_data.append({
+            'teacherbatchdata':teacherbatchdata,
+            'batchdata':batchdata,
+            'enrolledstudent':enrolledstudent,
+            
+        })
+        
+    context = {
+        'teacherbatchdata':teacherbatchdata,
+        'combined_data':combined_data,
+        'totalstudent':totalstudent,
+    }
+
+    return render(request,'teachers/teacherbatchinfo.html',context) 
 
 @login_required
 def teachersalaryinfo(request):
@@ -128,7 +156,7 @@ def teacherattendence(request):
     
     try:
         getattendance = TeacherAttendance.objects.filter(Teacher=teacherdata, Date=current_date).first()
-        print(getattendance)
+        
     except TeacherAttendance.DoesNotExist:
         getattendance = None
     

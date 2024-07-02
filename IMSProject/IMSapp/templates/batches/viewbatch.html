@@ -162,12 +162,17 @@
                       <a href="" class="btn btn-link btn-primary btn-md">
                         <i class="fa fa-eye"></i>
                       </a>
-                      <a href="" class="btn btn-link btn-primary btn-md">
-                        <i class="fa fa-edit"></i>
-                      </a>
-                      <a href="" class="btn btn-link btn-danger btn-md">
-                        <i class="fa fa-trash"></i>
-                      </a>
+                     
+                     {% if user.UserType == 'Authority' %}
+                     <a href="" class="btn btn-link btn-primary btn-md">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="" class="btn btn-link btn-danger btn-md">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                      
+                     {% endif %}
+                      
                       
                     </div>
                   </td>
