@@ -14,27 +14,29 @@ def addbatch(request):
             batchteacher = batch.BatchInstructor
             batchno = batch.BatchNo
             teachers_list = [teacher.strip() for teacher in batchteacher.split(',')]
-
+            len(teachers_list)
+            teacher_instances = []
             for teacherid in teachers_list:
                 try:
                     teacher_instance = TeacherModel.objects.get(EmployID=teacherid)
-                    
+                    teacher_instances.append(teacher_instance)
                 except TeacherModel.DoesNotExist:
                     messages.error(request, "Teacher Id not exists.")
                     return render(request, "batches/addbatch.html", {
                         'batchform': batchform,
                     })
                 
-                batch.save()
-                batchdata = get_object_or_404(BatchInfoModel, BatchNo=batchno)
-                teacherassign = TeacherBatchModel(
-                    teacheruser= teacher_instance,
-                    batch=batchdata,
-                )
-                teacherassign.save()
-                print("teacher data: ", teacher_instance)
+                if len(teachers_list) == len(teacher_instances):
+                    batch.save()
+                    batchdata = get_object_or_404(BatchInfoModel, BatchNo=batchno)
+                    for teacher_instance in teacher_instances:
+                        teacherassign = TeacherBatchModel(
+                            teacheruser= teacher_instance,
+                            batch=batchdata,
+                        )
+                        teacherassign.save()
 
-            return redirect('batchlist')
+                    return redirect('batchlist')
     else:
         batchform = BatchInfoForm()
     context = {
